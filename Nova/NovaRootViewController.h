@@ -1,0 +1,24 @@
+//
+//  NovaRootViewController.h
+//  Nova
+//
+//  Created by Yubo Qin on 2018/1/31.
+//  Copyright © 2018年 Yubo Qin. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@protocol NovaRootViewControllerDelegate
+
+@optional
+- (void)didFinishNavigation;
+
+@end
+
+@interface NovaRootViewController : UIViewController
+
+@property (strong, nonatomic) NSString *url;
+@property (strong, nonatomic) NSMutableArray<NSString *> *initialJSScripts;
+@property (weak, nonatomic, nullable) id<NovaRootViewControllerDelegate> delegate;
+
+@end
