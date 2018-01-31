@@ -7,11 +7,23 @@
 
         <title>Hello World</title>
     </head>
+    <style>
+        .btn:focus {
+            outline: none;
+        }
+    </style>
     <body>
         <div class="container">
             <h1>Hello, world!</h1>
-        </div>
+            <button class="btn btn-outline-primary" onclick="nova.navigation.postMessage({type: 'show', url: 'demo.html', title: 'Test'})">Push</button>
+            <button class="btn btn-outline-primary" onclick="nova.navigation.postMessage({type: 'pop'})">Pop</button>
 
+            <button class="btn btn-outline-primary" onclick="nova.navigation.postMessage({type: 'present', url: 'demo.html', title: 'Test'})">Present</button>
+            <button class="btn btn-outline-primary" onclick="nova.navigation.postMessage({type: 'dismiss'})">Dismiss</button>
+            
+            <br/><br/>
+            <button class="btn btn-outline-primary" onclick="alert('test message from JavaScript');">Alert</button>
+        </div>
 
         <script src="bootstrap.min.js"></script>
     </body>

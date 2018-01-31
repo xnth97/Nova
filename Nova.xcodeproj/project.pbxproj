@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9689D242022360200045D69 /* NovaNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9689D232022360200045D69 /* NovaNavigation.m */; };
 		E97CA98B2021902A00A178A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA98A2021902A00A178A7 /* AppDelegate.m */; };
 		E97CA98E2021902A00A178A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA98D2021902A00A178A7 /* ViewController.m */; };
 		E97CA9912021902A00A178A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97CA98F2021902A00A178A7 /* Main.storyboard */; };
@@ -21,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E9689D222022360200045D69 /* NovaNavigation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaNavigation.h; sourceTree = "<group>"; };
+		E9689D232022360200045D69 /* NovaNavigation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaNavigation.m; sourceTree = "<group>"; };
 		E97CA9862021902A00A178A7 /* Nova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nova.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97CA9892021902A00A178A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E97CA98A2021902A00A178A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -92,6 +95,8 @@
 			children = (
 				E97CA9A02021904900A178A7 /* NovaRootViewController.h */,
 				E97CA9A12021904900A178A7 /* NovaRootViewController.m */,
+				E9689D222022360200045D69 /* NovaNavigation.h */,
+				E9689D232022360200045D69 /* NovaNavigation.m */,
 			);
 			path = Nova;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				E97CA98E2021902A00A178A7 /* ViewController.m in Sources */,
 				E97CA9992021902A00A178A7 /* main.m in Sources */,
 				E97CA9A22021904900A178A7 /* NovaRootViewController.m in Sources */,
+				E9689D242022360200045D69 /* NovaNavigation.m in Sources */,
 				E97CA9AE20219DCA00A178A7 /* DemoViewController.m in Sources */,
 				E97CA98B2021902A00A178A7 /* AppDelegate.m in Sources */,
 			);
