@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E9689D242022360200045D69 /* NovaNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9689D232022360200045D69 /* NovaNavigation.m */; };
 		E97CA98B2021902A00A178A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA98A2021902A00A178A7 /* AppDelegate.m */; };
-		E97CA98E2021902A00A178A7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA98D2021902A00A178A7 /* ViewController.m */; };
 		E97CA9912021902A00A178A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97CA98F2021902A00A178A7 /* Main.storyboard */; };
 		E97CA9932021902A00A178A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E97CA9922021902A00A178A7 /* Assets.xcassets */; };
 		E97CA9962021902A00A178A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97CA9942021902A00A178A7 /* LaunchScreen.storyboard */; };
@@ -19,6 +18,7 @@
 		E97CA9AA20219B6800A178A7 /* bootstrap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E97CA9A720219B6800A178A7 /* bootstrap.min.js */; };
 		E97CA9AB20219B6800A178A7 /* demo.html in Resources */ = {isa = PBXBuildFile; fileRef = E97CA9A820219B6800A178A7 /* demo.html */; };
 		E97CA9AE20219DCA00A178A7 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA9AD20219DCA00A178A7 /* DemoViewController.m */; };
+		E990253F2022EF1200937F89 /* NovaUIBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E990253E2022EF1200937F89 /* NovaUIBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,8 +27,6 @@
 		E97CA9862021902A00A178A7 /* Nova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nova.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E97CA9892021902A00A178A7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E97CA98A2021902A00A178A7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E97CA98C2021902A00A178A7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E97CA98D2021902A00A178A7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E97CA9902021902A00A178A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E97CA9922021902A00A178A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E97CA9952021902A00A178A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -41,6 +39,8 @@
 		E97CA9A820219B6800A178A7 /* demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
 		E97CA9AC20219DCA00A178A7 /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		E97CA9AD20219DCA00A178A7 /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		E990253D2022EF1200937F89 /* NovaUIBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaUIBridge.h; sourceTree = "<group>"; };
+		E990253E2022EF1200937F89 /* NovaUIBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaUIBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +77,6 @@
 				E97CA9A520219B6800A178A7 /* Resources */,
 				E97CA9892021902A00A178A7 /* AppDelegate.h */,
 				E97CA98A2021902A00A178A7 /* AppDelegate.m */,
-				E97CA98C2021902A00A178A7 /* ViewController.h */,
-				E97CA98D2021902A00A178A7 /* ViewController.m */,
 				E97CA9AC20219DCA00A178A7 /* DemoViewController.h */,
 				E97CA9AD20219DCA00A178A7 /* DemoViewController.m */,
 				E97CA98F2021902A00A178A7 /* Main.storyboard */,
@@ -97,6 +95,8 @@
 				E97CA9A12021904900A178A7 /* NovaRootViewController.m */,
 				E9689D222022360200045D69 /* NovaNavigation.h */,
 				E9689D232022360200045D69 /* NovaNavigation.m */,
+				E990253D2022EF1200937F89 /* NovaUIBridge.h */,
+				E990253E2022EF1200937F89 /* NovaUIBridge.m */,
 			);
 			path = Nova;
 			sourceTree = "<group>";
@@ -185,7 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E97CA98E2021902A00A178A7 /* ViewController.m in Sources */,
+				E990253F2022EF1200937F89 /* NovaUIBridge.m in Sources */,
 				E97CA9992021902A00A178A7 /* main.m in Sources */,
 				E97CA9A22021904900A178A7 /* NovaRootViewController.m in Sources */,
 				E9689D242022360200045D69 /* NovaNavigation.m in Sources */,

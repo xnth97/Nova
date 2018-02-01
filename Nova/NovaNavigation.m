@@ -1,5 +1,5 @@
 //
-//  NovaNavigator.m
+//  NovaNavigation.m
 //  Nova
 //
 //  Created by Yubo Qin on 2018/1/31.
@@ -29,29 +29,54 @@
     if (type == nil) {
         type = @"present";
     }
-    UIViewController *topViewController = [self topViewController];
+    UIViewController *topViewController = [NovaNavigation topViewController];
     if ([type isEqualToString:@"show"] || [type isEqualToString:@"present"]) {
-        NSString *url = [parameters objectForKey:@"url"];
+        NSString *class = [parameters objectForKey:@"class"];
         NSString *title = [parameters objectForKey:@"title"];
-        
-        NovaRootViewController *newRootVC = [[NovaRootViewController alloc] init];
-        newRootVC.title = title;
-        newRootVC.url = url;
-        if (topViewController.navigationController != nil && [type isEqualToString:@"show"]) {
-            [topViewController.navigationController showViewController:newRootVC sender:nil];
+        UIViewController *controllerToPush = nil;
+        if (class == nil) {
+            NSString *url = [parameters objectForKey:@"url"];
+            
+            NovaRootViewController *newRootVC = [[NovaRootViewController alloc] init];
+            newRootVC.title = title;
+            newRootVC.url = url;
+            controllerToPush = newRootVC;
         } else {
-            [topViewController presentViewController:newRootVC animated:YES completion:nil];
+            id instance = [[NSClassFromString(class) alloc] init];
+            controllerToPush = (UIViewController *)instance;
+            controllerToPush.title = title;
+        }
+        
+        if ([parameters objectForKey:@"initJS"] != nil && [controllerToPush isKindOfClass:[NovaRootViewController class]]) {
+            [((NovaRootViewController *)controllerToPush).initialJSScripts addObject:[parameters objectForKey:@"initJS"]];
+        }
+        
+        if (topViewController.navigationController != nil && [type isEqualToString:@"show"]) {
+            [topViewController.navigationController showViewController:controllerToPush sender:nil];
+        } else {
+            if ([parameters objectForKey:@"nav"] == nil) {
+                [topViewController presentViewController:controllerToPush animated:YES completion:nil];
+            } else {
+                UINavigationController *newNav = [[UINavigationController alloc] initWithRootViewController:controllerToPush];
+                [topViewController presentViewController:newNav animated:YES completion:nil];
+            }
         }
     } else if ([type isEqualToString:@"pop"]) {
         if (topViewController.navigationController != nil) {
             [topViewController.navigationController popViewControllerAnimated:YES];
+        } else {
+            [topViewController dismissViewControllerAnimated:YES completion:nil];
         }
     } else if ([type isEqualToString:@"dismiss"]) {
-        [topViewController dismissViewControllerAnimated:YES completion:nil];
+        if (topViewController.navigationController != nil) {
+            [topViewController.navigationController dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [topViewController dismissViewControllerAnimated:YES completion:nil];
+        }
     }
 }
 
-- (UIViewController *)topViewController {
++ (UIViewController *)topViewController {
     UIViewController *resultVC;
     resultVC = [self _topViewController:[[UIApplication sharedApplication].keyWindow rootViewController]];
     while (resultVC.presentedViewController) {
@@ -60,7 +85,7 @@
     return resultVC;
 }
 
-- (UIViewController *)_topViewController:(UIViewController *)vc {
++ (UIViewController *)_topViewController:(UIViewController *)vc {
     if ([vc isKindOfClass:[UINavigationController class]]) {
         return [self _topViewController:[(UINavigationController *)vc topViewController]];
     } else if ([vc isKindOfClass:[UITabBarController class]]) {

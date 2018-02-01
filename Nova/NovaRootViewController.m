@@ -8,7 +8,7 @@
 
 #import "NovaRootViewController.h"
 #import "NovaNavigation.h"
-#import <WebKit/WebKit.h>
+#import "NovaUIBridge.h"
 
 @interface NovaRootViewController ()<UIScrollViewDelegate, WKNavigationDelegate, WKUIDelegate>
 
@@ -20,24 +20,31 @@
 
 @implementation NovaRootViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self constructInitialJS];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _rootContentController = [[WKUserContentController alloc] init];
     
-    if (_initialJSScripts == nil) {
-        _initialJSScripts = [[NSMutableArray alloc] init];
-    }
-    [_initialJSScripts addObject:@"document.documentElement.style.webkitTouchCallout='none';document.documentElement.style.webkitUserSelect='none';"];
-    [_initialJSScripts addObject:@"const nova = window.webkit.messageHandlers;"];
-
+    // In case of the ViewController is initialized by storyboard instead of calling init:
+    [self constructInitialJS];
+    
+    // Add initial JS scripts
     for (NSString *jsScript in _initialJSScripts) {
         WKUserScript *tmpScript = [[WKUserScript alloc] initWithSource:jsScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
         [_rootContentController addUserScript:tmpScript];
     }
     
-    // message handlers
+    // Add message handlers
     [_rootContentController addScriptMessageHandler:[NovaNavigation sharedInstance] name:@"navigation"];
+    [_rootContentController addScriptMessageHandler:[NovaUIBridge sharedInstance] name:@"ui"];
     
     _rootConfiguration = [[WKWebViewConfiguration alloc] init];
     _rootConfiguration.userContentController = _rootContentController;
@@ -67,6 +74,14 @@
     _rootConfiguration = nil;
 }
 
+- (void)constructInitialJS {
+    if (_initialJSScripts == nil) {
+        _initialJSScripts = [[NSMutableArray alloc] init];
+        [_initialJSScripts addObject:@"document.documentElement.style.webkitTouchCallout='none';document.documentElement.style.webkitUserSelect='none';"];
+        [_initialJSScripts addObject:@"const nova = window.webkit.messageHandlers;"];
+    }
+}
+
 - (void)setUrl:(NSString *)url {
     _url = url;
     [self loadUrl:url];
@@ -89,6 +104,10 @@
     [_rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
 }
 
+- (void)addMessageHandler:(id)handler forMessage:(NSString *)message {
+    [_rootContentController addScriptMessageHandler:handler name:message];
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
@@ -99,6 +118,10 @@
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [_delegate didFinishNavigation];
+}
+
+- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
+    
 }
 
 #pragma mark - WKUIDelegate

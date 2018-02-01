@@ -8,6 +8,7 @@ A lightweight HTML container for iOS.
 * JavaScript injection
 * Automatically loads remote URL/local resources
 * Modulize MessageHandlers
+* Dynamically initialize ViewControllers
 
 # TODO List
 
