@@ -8,6 +8,15 @@
 
 #import "NovaNavigation.h"
 #import "NovaRootViewController.h"
+#import <objc/runtime.h>
+
+#define SuppressPerformSelectorLeakWarning(Stuff) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+Stuff; \
+_Pragma("clang diagnostic pop") \
+} while (0)
 
 @implementation NovaNavigation
 
@@ -32,23 +41,32 @@
     UIViewController *topViewController = [NovaNavigation topViewController];
     if ([type isEqualToString:@"show"] || [type isEqualToString:@"present"]) {
         NSString *class = [parameters objectForKey:@"class"];
-        NSString *title = [parameters objectForKey:@"title"];
         UIViewController *controllerToPush = nil;
         if (class == nil) {
-            NSString *url = [parameters objectForKey:@"url"];
-            
             NovaRootViewController *newRootVC = [[NovaRootViewController alloc] init];
-            newRootVC.title = title;
-            newRootVC.url = url;
             controllerToPush = newRootVC;
         } else {
             id instance = [[NSClassFromString(class) alloc] init];
             controllerToPush = (UIViewController *)instance;
-            controllerToPush.title = title;
         }
         
         if ([parameters objectForKey:@"initJS"] != nil && [controllerToPush isKindOfClass:[NovaRootViewController class]]) {
             [((NovaRootViewController *)controllerToPush).initialJSScripts addObject:[parameters objectForKey:@"initJS"]];
+        }
+        
+        for (NSString *key in [parameters allKeys]) {
+            if ([key isEqualToString:@"type"] || [key isEqualToString:@"nav"] || [key isEqualToString:@"initJS"]) {
+                continue;
+            }
+            
+            // for other keys, dynamically add them to UIViewController instance
+            NSString *selStr = [NSString stringWithFormat:@"set%@:", key.capitalizedString];
+            SEL setSel = NSSelectorFromString(selStr);
+            if ([controllerToPush respondsToSelector:setSel]) {
+                SuppressPerformSelectorLeakWarning(
+                    [controllerToPush performSelector:setSel withObject:[parameters objectForKey:key]];
+                );
+            }
         }
         
         if (topViewController.navigationController != nil && [type isEqualToString:@"show"]) {

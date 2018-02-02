@@ -15,10 +15,11 @@
 #import <UIKit/UIKit.h>
 #import <WebKit/WebKit.h>
 
-@protocol NovaRootViewControllerDelegate
+@protocol NovaRootViewControllerDelegate <NSObject>
 
 @optional
 - (void)didFinishNavigation;
+- (void)policyForLinkNavigation:(NSURL * _Nonnull)url;
 
 @end
 
@@ -28,7 +29,7 @@
 @property (strong, nonatomic, nullable) NSMutableArray<NSString *> *initialJSScripts;
 @property (weak, nonatomic, nullable) id<NovaRootViewControllerDelegate> delegate;
 
-- (void)evaluateJavaScript:(NSString *_Nonnull)javascript completionHandler:(void(^ _Nullable) (_Nullable id, NSError * _Nullable error))completionHandler;
+- (void)evaluateJavaScript:(NSString * _Nonnull)javascript completionHandler:(void(^ _Nullable) (_Nullable id, NSError * _Nullable error))completionHandler;
 - (void)addMessageHandler:(id <WKScriptMessageHandler> _Nonnull)handler forMessage:(NSString *_Nonnull)message;
 
 @end

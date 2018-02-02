@@ -29,6 +29,9 @@
     if ([parameters objectForKey:@"alert"] != nil) {
         [self constructAlert:[parameters objectForKey:@"alert"]];
     }
+    if ([parameters objectForKey:@"orientation"] != nil) {
+        [self constructOrientation:parameters[@"orientation"]];
+    }
 }
 
 - (void)constructAlert:(NSDictionary *)parameters {
@@ -44,6 +47,23 @@
         [alert addAction:action];
         [[NovaNavigation topViewController] presentViewController:alert animated:YES completion:nil];
     });
+}
+
+- (void)constructOrientation:(NSString *)orientation {
+    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+        SEL selector = NSSelectorFromString(@"setOrientation:");
+        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
+        [invocation setSelector:selector];
+        [invocation setTarget:[UIDevice currentDevice]];
+        int val = UIDeviceOrientationPortrait;
+        if ([orientation isEqualToString:@"landscapeLeft"]) {
+            val = UIDeviceOrientationLandscapeLeft;
+        } else if ([orientation isEqualToString:@"landscapeRight"]) {
+            val = UIDeviceOrientationLandscapeRight;
+        }
+        [invocation setArgument:&val atIndex:2];
+        [invocation invoke];
+    }
 }
 
 @end

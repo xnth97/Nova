@@ -18,9 +18,13 @@
             <button class="btn btn-outline-primary" onclick="nova.navigation.postMessage({type: 'present', class: 'DemoViewController', nav: 'true', initJS: 'alert(\'Hello from JS!\');'})">Present With Nav</button>
             <button class="btn btn-outline-primary" onclick="nova.navigation.postMessage({type: 'dismiss'})">Dismiss</button>
             
+            <a class="btn btn-outline-primary" href="https://www.google.com">External Link</a>
+            
             <br/><br/>
             <button class="btn btn-outline-primary" onclick="alert('test message from JavaScript');">Alert</button>
             <button class="btn btn-outline-primary" onclick="nova.ui.postMessage({alert: {title: 'Title', message: 'Alert Message', action: 'Cancel'}});">Customized Alert</button>
+            <button class="btn btn-outline-primary" onclick="nova.ui.postMessage({orientation: 'portrait'});">Portrait</button>
+            <button class="btn btn-outline-primary" onclick="nova.ui.postMessage({orientation: 'landscapeLeft'});">Landscape</button>
         </div>
 
         <script src="bootstrap.min.js"></script>

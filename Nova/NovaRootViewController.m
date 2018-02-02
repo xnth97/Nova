@@ -9,6 +9,7 @@
 #import "NovaRootViewController.h"
 #import "NovaNavigation.h"
 #import "NovaUIBridge.h"
+#import <SafariServices/SafariServices.h>
 
 @interface NovaRootViewController ()<UIScrollViewDelegate, WKNavigationDelegate, WKUIDelegate>
 
@@ -120,8 +121,34 @@
     [_delegate didFinishNavigation];
 }
 
-- (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation {
-    
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
+        NSURL *url = navigationAction.request.URL;
+        if ([url.description hasPrefix:@"mailto:"] || [url.description hasPrefix:@"tel:"]) {
+            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+        } else {
+            if (![_delegate respondsToSelector:@selector(policyForLinkNavigation:)]) {
+                if (![url.description hasPrefix:@"http"] && [url.description hasSuffix:@".html"]) {
+                    NovaRootViewController *rootVC = [[NovaRootViewController alloc] init];
+                    rootVC.url = url.description;
+                    if (self.navigationController == nil) {
+                        [self presentViewController:rootVC animated:YES completion:nil];
+                    } else {
+                        [self.navigationController showViewController:rootVC sender:nil];
+                    }
+                } else {
+                    SFSafariViewController *rootVC = [[SFSafariViewController alloc] initWithURL:url];
+                    [self presentViewController:rootVC animated:YES completion:nil];
+                }
+                
+            } else {
+                [_delegate policyForLinkNavigation:url];
+            }
+        }
+        decisionHandler(WKNavigationActionPolicyCancel);
+    } else {
+        decisionHandler(WKNavigationActionPolicyAllow);
+    }
 }
 
 #pragma mark - WKUIDelegate
@@ -133,7 +160,7 @@
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Alert" message:message preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];
