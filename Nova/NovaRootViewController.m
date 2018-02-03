@@ -125,7 +125,11 @@
     if (navigationAction.navigationType == WKNavigationTypeLinkActivated) {
         NSURL *url = navigationAction.request.URL;
         if ([url.description hasPrefix:@"mailto:"] || [url.description hasPrefix:@"tel:"]) {
-            [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            if (@available(iOS 10.0, *)) {
+                [[UIApplication sharedApplication] openURL:url options:@{} completionHandler:nil];
+            } else {
+                [[UIApplication sharedApplication] openURL:url];
+            }
         } else {
             if (![_delegate respondsToSelector:@selector(policyForLinkNavigation:)]) {
                 if (![url.description hasPrefix:@"http"] && [url.description hasSuffix:@".html"]) {
