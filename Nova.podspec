@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "Nova"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "A lightweight HTML container."
   s.description  = "Nova is a lightweight HTML container for iOS that provides some native abilities to JavaScript in WKWebView."
   s.homepage     = "https://github.com/xnth97/Nova"
