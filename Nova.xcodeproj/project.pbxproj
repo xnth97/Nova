@@ -18,6 +18,8 @@
 		E97CA9AA20219B6800A178A7 /* bootstrap.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E97CA9A720219B6800A178A7 /* bootstrap.min.js */; };
 		E97CA9AB20219B6800A178A7 /* demo.html in Resources */ = {isa = PBXBuildFile; fileRef = E97CA9A820219B6800A178A7 /* demo.html */; };
 		E97CA9AE20219DCA00A178A7 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA9AD20219DCA00A178A7 /* DemoViewController.m */; };
+		E985CC042025909600F2D292 /* navigation.html in Resources */ = {isa = PBXBuildFile; fileRef = E985CC032025909600F2D292 /* navigation.html */; };
+		E985CC062025919A00F2D292 /* ui.html in Resources */ = {isa = PBXBuildFile; fileRef = E985CC052025919A00F2D292 /* ui.html */; };
 		E990253F2022EF1200937F89 /* NovaUIBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E990253E2022EF1200937F89 /* NovaUIBridge.m */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +41,8 @@
 		E97CA9A820219B6800A178A7 /* demo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = demo.html; sourceTree = "<group>"; };
 		E97CA9AC20219DCA00A178A7 /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		E97CA9AD20219DCA00A178A7 /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		E985CC032025909600F2D292 /* navigation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = navigation.html; sourceTree = "<group>"; };
+		E985CC052025919A00F2D292 /* ui.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = ui.html; sourceTree = "<group>"; };
 		E990253D2022EF1200937F89 /* NovaUIBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaUIBridge.h; sourceTree = "<group>"; };
 		E990253E2022EF1200937F89 /* NovaUIBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaUIBridge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +111,8 @@
 				E97CA9A620219B6800A178A7 /* bootstrap.min.css */,
 				E97CA9A720219B6800A178A7 /* bootstrap.min.js */,
 				E97CA9A820219B6800A178A7 /* demo.html */,
+				E985CC032025909600F2D292 /* navigation.html */,
+				E985CC052025919A00F2D292 /* ui.html */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -169,10 +175,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E985CC062025919A00F2D292 /* ui.html in Resources */,
 				E97CA9A920219B6800A178A7 /* bootstrap.min.css in Resources */,
 				E97CA9AB20219B6800A178A7 /* demo.html in Resources */,
 				E97CA9962021902A00A178A7 /* LaunchScreen.storyboard in Resources */,
 				E97CA9AA20219B6800A178A7 /* bootstrap.min.js in Resources */,
+				E985CC042025909600F2D292 /* navigation.html in Resources */,
 				E97CA9932021902A00A178A7 /* Assets.xcassets in Resources */,
 				E97CA9912021902A00A178A7 /* Main.storyboard in Resources */,
 			);
@@ -325,6 +333,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NovaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.yuboqin.Nova;
@@ -338,6 +347,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NovaDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.yuboqin.Nova;

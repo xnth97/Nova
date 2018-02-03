@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"Bootstrap Demo";
+    self.title = @"Nova Demo";
     self.url = @"demo.html";
     self.delegate = self;
 }

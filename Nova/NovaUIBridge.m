@@ -9,6 +9,7 @@
 #import "NovaUIBridge.h"
 #import <UIKit/UIKit.h>
 #import "NovaNavigation.h"
+#import "NovaRootViewController.h"
 
 @implementation NovaUIBridge
 
@@ -27,24 +28,42 @@
     }
     NSDictionary *parameters = message.body;
     if ([parameters objectForKey:@"alert"] != nil) {
-        [self constructAlert:[parameters objectForKey:@"alert"]];
+        [self constructAlert:[parameters objectForKey:@"alert"] style:UIAlertControllerStyleAlert];
+    }
+    if ([parameters objectForKey:@"actionSheet"] != nil) {
+        [self constructAlert:[parameters objectForKey:@"actionSheet"] style:UIAlertControllerStyleActionSheet];
     }
     if ([parameters objectForKey:@"orientation"] != nil) {
         [self constructOrientation:parameters[@"orientation"]];
     }
 }
 
-- (void)constructAlert:(NSDictionary *)parameters {
+- (void)constructAlert:(NSDictionary *)parameters style:(UIAlertControllerStyle)style {
     NSString *title = parameters[@"title"];
     NSString *message = parameters[@"message"];
-    NSString *actionTitle = parameters[@"action"];
-    if (actionTitle == nil) {
-        actionTitle = @"OK";
-    }
+    NSArray *actions = parameters[@"actions"];
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitle style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:action];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:style];
+        UIViewController *top = [NovaNavigation topViewController];
+        for (NSDictionary *actionParam in actions) {
+            UIAlertActionStyle s = UIAlertActionStyleDefault;
+            if ([actionParam objectForKey:@"style"] != nil) {
+                NSString *actionStyle = actionParam[@"style"];
+                if ([actionStyle isEqualToString:@"destructive"]) {
+                    s = UIAlertActionStyleDestructive;
+                } else if ([actionStyle isEqualToString:@"cancel"]) {
+                    s = UIAlertActionStyleCancel;
+                }
+            }
+            UIAlertAction *action = [UIAlertAction actionWithTitle:actionParam[@"title"] style:s handler:^(UIAlertAction *_action) {
+                if ([actionParam objectForKey:@"callback"] != nil) {
+                    if ([top isKindOfClass:[NovaRootViewController class]]) {
+                        [((NovaRootViewController *)top) evaluateJavaScript:[actionParam objectForKey:@"callback"] completionHandler:nil];
+                    }
+                }
+            }];
+            [alert addAction:action];
+        }
         [[NovaNavigation topViewController] presentViewController:alert animated:YES completion:nil];
     });
 }
