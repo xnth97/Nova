@@ -9,10 +9,12 @@
         <div class="list-group">
             <a class="list-group-item list-group-item-action" href="javascript:alert('Hello from JavaScript!')" >Default Alert</a>
             <a class="list-group-item list-group-item-action" href="javascript:nova.ui.postMessage({ alert: {title: 'Hello', message: 'Hello Again!', actions: [ { title: 'OK', callback: 'alert(\'Callback from OK action\');' }, { title: 'Cancel', callback: 'alert(\'Callback from Cancel action\');', style: 'destructive' } ] } })" >Custom Alert</a>
-            <a class="list-group-item list-group-item-action" href="javascript:nova.ui.postMessage({ actionSheet: { title: 'Hello', message: 'Hello Again!', actions: [ { title: 'First', callback: 'alert(\'Callback from First action\');' }, { title: 'Second', callback: 'alert(\'Callback from Second action\');' }, { title: 'Destructive', callback: 'alert(\'Callback from Destructive action\');', style: 'destructive' } ] } })" >ActionSheet</a>
+            <a class="list-group-item list-group-item-action" href="javascript:nova.ui.postMessage({ actionSheet: { title: 'Hello', message: 'Hello Again!', actions: [ { title: 'First', callback: 'alert(\'Callback from First action\');' }, { title: 'Second', callback: 'alert(\'Callback from Second action\');' }, { title: 'Destructive', callback: 'alert(\'Callback from Destructive action\');', style: 'destructive' }, { title: 'Cancel', style: 'cancel' } ] } })" >ActionSheet</a>
+            <a class="list-group-item list-group-item-action" href="javascript:nova.ui.postMessage({ rightBarButton: { style: 'action', callback: 'alert(\'This is a UIBarButtonItem\');' } })" >NavigationBar Button</a>
             <a class="list-group-item list-group-item-action" href="javascript:nova.ui.postMessage({ orientation: 'portrait' })" >Portrait</a>
             <a class="list-group-item list-group-item-action" href="javascript:nova.ui.postMessage({ orientation: 'landscapeLeft' })" >Landscape Left</a>
             <a class="list-group-item list-group-item-action" href="javascript:nova.ui.postMessage({ orientation: 'landscapeRight' })" >Landscape Right</a>
+
         </div>
         
         <script src="bootstrap.min.js"></script>

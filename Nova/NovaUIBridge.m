@@ -10,6 +10,8 @@
 #import <UIKit/UIKit.h>
 #import "NovaNavigation.h"
 #import "NovaRootViewController.h"
+#import "NovaBlockHolder.h"
+#import <objc/runtime.h>
 
 @implementation NovaUIBridge
 
@@ -35,6 +37,12 @@
     }
     if ([parameters objectForKey:@"orientation"] != nil) {
         [self constructOrientation:parameters[@"orientation"]];
+    }
+    if ([parameters objectForKey:@"leftBarButton"] != nil) {
+        [self constructBarButton:parameters[@"leftBarButton"] direction:0];
+    }
+    if ([parameters objectForKey:@"rightBarButton"] != nil) {
+        [self constructBarButton:parameters[@"rightBarButton"] direction:1];
     }
 }
 
@@ -83,6 +91,54 @@
         [invocation setArgument:&val atIndex:2];
         [invocation invoke];
     }
+}
+
+- (void)constructBarButton:(NSDictionary *)parameters direction:(NSUInteger)direction {
+    NSString *title = parameters[@"title"];
+    NSString *callback = parameters[@"callback"];
+    NSString *style = parameters[@"style"];
+    NovaBlockHolder *blockHolder = [NovaBlockHolder blockHolderWithBlock:^() {
+        [(NovaRootViewController *)[NovaNavigation topViewController] evaluateJavaScript:callback completionHandler:nil];
+    }];
+    dispatch_async(dispatch_get_main_queue(), ^() {
+        UIBarButtonItem *barButtonItem;
+        if (title == nil && style != nil) {
+            NSDictionary<NSString *, NSNumber *> *styleDict = @{@"add": @(UIBarButtonSystemItemAdd),
+                                                                @"done": @(UIBarButtonSystemItemDone),
+                                                                @"cancel": @(UIBarButtonSystemItemCancel),
+                                                                @"edit": @(UIBarButtonSystemItemEdit),
+                                                                @"save": @(UIBarButtonSystemItemSave),
+                                                                @"camera": @(UIBarButtonSystemItemCamera),
+                                                                @"trash": @(UIBarButtonSystemItemTrash),
+                                                                @"reply": @(UIBarButtonSystemItemReply),
+                                                                @"action": @(UIBarButtonSystemItemAction),
+                                                                @"organize": @(UIBarButtonSystemItemOrganize),
+                                                                @"compose": @(UIBarButtonSystemItemCompose),
+                                                                @"refresh": @(UIBarButtonSystemItemRefresh),
+                                                                @"bookmarks": @(UIBarButtonSystemItemBookmarks),
+                                                                @"search": @(UIBarButtonSystemItemSearch),
+                                                                @"stop": @(UIBarButtonSystemItemStop),
+                                                                @"play": @(UIBarButtonSystemItemPlay),
+                                                                @"pause": @(UIBarButtonSystemItemPause),
+                                                                @"redo": @(UIBarButtonSystemItemRedo),
+                                                                @"undo": @(UIBarButtonSystemItemUndo),
+                                                                @"rewind": @(UIBarButtonSystemItemRewind),
+                                                                @"fastforward": @(UIBarButtonSystemItemFastForward)
+                                                                };
+            barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:styleDict[style].integerValue target:blockHolder action:@selector(invoke)];
+        } else if (title != nil) {
+            barButtonItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:blockHolder action:@selector(invoke)];
+        }
+        if (direction == 0) {
+            [[NovaNavigation topViewController].navigationItem setLeftBarButtonItem:barButtonItem];
+        } else {
+            [[NovaNavigation topViewController].navigationItem setRightBarButtonItem:barButtonItem];
+        }
+        // Note that the blockHolder instance won't be retained, therefore we use
+        // ObjC's setAssociatedObject to tie the lifetime of blockHolder to the lifetime
+        // of the control.
+        objc_setAssociatedObject(barButtonItem, @"__block_holder__", blockHolder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    });
 }
 
 @end

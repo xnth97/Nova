@@ -2,6 +2,8 @@
 //  NovaNavigation.h
 //  Nova
 //
+//  Navigation message handler of Nova. Handles 'navigation' messages.
+//
 //  Created by Yubo Qin on 2018/1/31.
 //  Copyright © 2018 Yubo Qin. All rights reserved.
 //

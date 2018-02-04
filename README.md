@@ -17,9 +17,13 @@ A lightweight HTML container for iOS.
 
 # Usage
 
+## Install
+
+`pod install nova`
+
 ## Basic
 
-Simply use `NovaRootViewController` or its subclass, set its `url` property to a local HTML resource or a remote website.
+Simply use `NovaRootViewController` or its subclass, and set its `url` property to a local HTML resource or a remote website.
 
 ## Navigation
 
@@ -89,12 +93,54 @@ nova.ui.postMessage({ actionSheet: {
             title: 'Destructive',
             callback: 'alert(\'Callback from Destructive action\');',
             style: 'destructive'
+        }, {
+            title: 'Cancel', 
+            style: 'cancel'
         }
     ]
 }});
 ```
 
 Same as alert.
+
+### NavigationBar Button
+
+```javascript
+nova.ui.postMessage({ rightBarButton: {
+    style: 'action', 
+    callback: 'alert(\'This is a UIBarButtonItem\');' 
+}});
+```
+
+Besides `rightBarButton`, you can also use `leftBarButton`, which, of course, sets the left UIBarButtonItem of the NavigationBar.
+
+You can either use `style` or `title` parameter to customize the button, but only one parameter will make effect, which by default is `title`. For `style` parameter, it will be casted to `UIBarButtonSystem` enum, and there's a very direct mapping:
+
+```objective-c
+@{
+    @"add": @(UIBarButtonSystemItemAdd),
+    @"done": @(UIBarButtonSystemItemDone),
+    @"cancel": @(UIBarButtonSystemItemCancel),
+    @"edit": @(UIBarButtonSystemItemEdit),
+    @"save": @(UIBarButtonSystemItemSave),
+    @"camera": @(UIBarButtonSystemItemCamera),
+    @"trash": @(UIBarButtonSystemItemTrash),
+    @"reply": @(UIBarButtonSystemItemReply),
+    @"action": @(UIBarButtonSystemItemAction),
+    @"organize": @(UIBarButtonSystemItemOrganize),
+    @"compose": @(UIBarButtonSystemItemCompose),
+    @"refresh": @(UIBarButtonSystemItemRefresh),
+    @"bookmarks": @(UIBarButtonSystemItemBookmarks),
+    @"search": @(UIBarButtonSystemItemSearch),
+    @"stop": @(UIBarButtonSystemItemStop),
+    @"play": @(UIBarButtonSystemItemPlay),
+    @"pause": @(UIBarButtonSystemItemPause),
+    @"redo": @(UIBarButtonSystemItemRedo),
+    @"undo": @(UIBarButtonSystemItemUndo),
+    @"rewind": @(UIBarButtonSystemItemRewind),
+    @"fastforward": @(UIBarButtonSystemItemFastForward)
+}
+```
 
 ### Orientation
 
@@ -113,3 +159,7 @@ nova.ui.postMessage({ orientation: 'portrait' });
 - [ ] Runtime method invocation
 - [ ] Swift compatibility
 - [ ] UA
+
+# License
+
+Nova is released under the MIT License. 

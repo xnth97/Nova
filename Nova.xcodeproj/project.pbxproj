@@ -21,6 +21,7 @@
 		E985CC042025909600F2D292 /* navigation.html in Resources */ = {isa = PBXBuildFile; fileRef = E985CC032025909600F2D292 /* navigation.html */; };
 		E985CC062025919A00F2D292 /* ui.html in Resources */ = {isa = PBXBuildFile; fileRef = E985CC052025919A00F2D292 /* ui.html */; };
 		E990253F2022EF1200937F89 /* NovaUIBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E990253E2022EF1200937F89 /* NovaUIBridge.m */; };
+		E9A941592026AC930085BF1F /* NovaBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A941582026AC930085BF1F /* NovaBlockHolder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		E985CC052025919A00F2D292 /* ui.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = ui.html; sourceTree = "<group>"; };
 		E990253D2022EF1200937F89 /* NovaUIBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaUIBridge.h; sourceTree = "<group>"; };
 		E990253E2022EF1200937F89 /* NovaUIBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaUIBridge.m; sourceTree = "<group>"; };
+		E9A941572026AC930085BF1F /* NovaBlockHolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaBlockHolder.h; sourceTree = "<group>"; };
+		E9A941582026AC930085BF1F /* NovaBlockHolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaBlockHolder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +104,8 @@
 				E9689D232022360200045D69 /* NovaNavigation.m */,
 				E990253D2022EF1200937F89 /* NovaUIBridge.h */,
 				E990253E2022EF1200937F89 /* NovaUIBridge.m */,
+				E9A941572026AC930085BF1F /* NovaBlockHolder.h */,
+				E9A941582026AC930085BF1F /* NovaBlockHolder.m */,
 			);
 			path = Nova;
 			sourceTree = "<group>";
@@ -194,6 +199,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E990253F2022EF1200937F89 /* NovaUIBridge.m in Sources */,
+				E9A941592026AC930085BF1F /* NovaBlockHolder.m in Sources */,
 				E97CA9992021902A00A178A7 /* main.m in Sources */,
 				E97CA9A22021904900A178A7 /* NovaRootViewController.m in Sources */,
 				E9689D242022360200045D69 /* NovaNavigation.m in Sources */,
