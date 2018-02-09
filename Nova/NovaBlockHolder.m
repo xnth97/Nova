@@ -10,7 +10,7 @@
 
 @interface NovaBlockHolder ()
 
-@property (strong, nonatomic) dispatch_block_t block;
+@property (copy, nonatomic) dispatch_block_t block;
 
 @end
 

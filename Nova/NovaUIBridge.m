@@ -44,6 +44,9 @@
     if ([parameters objectForKey:@"rightBarButton"] != nil) {
         [self constructBarButton:parameters[@"rightBarButton"] direction:1];
     }
+    if ([parameters objectForKey:@"activity"] != nil) {
+        [self constructActivity:parameters[@"activity"]];
+    }
 }
 
 - (void)constructAlert:(NSDictionary *)parameters style:(UIAlertControllerStyle)style {
@@ -138,6 +141,37 @@
         // ObjC's setAssociatedObject to tie the lifetime of blockHolder to the lifetime
         // of the control.
         objc_setAssociatedObject(barButtonItem, @"__block_holder__", blockHolder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    });
+}
+
+- (void)constructActivity:(NSDictionary *)parameters {
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSString *text = [parameters objectForKey:@"text"];
+        NSURL *url = nil;
+        if ([parameters objectForKey:@"url"] != nil) {
+            url = [NSURL URLWithString:parameters[@"url"]];
+        }
+        UIImage *image = nil;
+        if ([parameters objectForKey:@"image"] != nil) {
+            NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:parameters[@"image"]]];
+            image = [[UIImage alloc] initWithData:imgData];
+        }
+        
+        NSMutableArray *activityItems = [[NSMutableArray alloc] init];
+        if (text != nil) {
+            [activityItems addObject:text];
+        }
+        if (url != nil) {
+            [activityItems addObject:url];
+        }
+        if (image != nil) {
+            [activityItems addObject:image];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^() {
+            UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+            [[NovaNavigation topViewController] presentViewController:activityVC animated:YES completion:nil];
+        });
     });
 }
 

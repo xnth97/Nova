@@ -30,6 +30,7 @@
 @property (weak, nonatomic, nullable) id<NovaRootViewControllerDelegate> delegate;
 
 - (void)evaluateJavaScript:(NSString * _Nonnull)javascript completionHandler:(void(^ _Nullable) (_Nullable id, NSError * _Nullable error))completionHandler;
+- (NSString *_Nullable)stringByEvaluatingJavaScript:(NSString * _Nonnull)javascript;
 - (void)addMessageHandler:(id <WKScriptMessageHandler> _Nonnull)handler forMessage:(NSString *_Nonnull)message;
 
 @end

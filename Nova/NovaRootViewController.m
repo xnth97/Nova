@@ -109,6 +109,28 @@
     [_rootContentController addScriptMessageHandler:handler name:message];
 }
 
+- (NSString *)stringByEvaluatingJavaScript:(NSString *)javascript {
+    __block NSString *result = nil;
+    __block BOOL finished = NO;
+    
+    [_rootWebView evaluateJavaScript:javascript completionHandler:^(id result, NSError *error) {
+        if (error == nil) {
+            if (result != nil) {
+                result = [NSString stringWithFormat:@"%@", result];
+            }
+        } else {
+            NSLog(@"evaluateJavaScript error: %@", error.localizedDescription);
+        }
+        finished = YES;
+    }];
+    
+    while (!finished) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    
+    return result;
+}
+
 #pragma mark - UIScrollViewDelegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
