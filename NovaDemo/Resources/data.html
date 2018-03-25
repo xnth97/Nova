@@ -7,19 +7,36 @@
     </head>
     <body>
         <div class="container">
-            <div class="col-md-12">
-                <form style="margin-top: 36px;">
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="input_text" placeholder="Please input anything you want to save"/>
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary" onclick="saveData()">Save</button>
-                    </div>
-                </form>
+            <div class="row">
+                <div class="col-md-12">
+                    <form style="margin-top: 36px;">
+                        <div class="form-group">
+                            <label for="input_key">Key</label>
+                            <input type="text" class="form-control" id="input_key" value="testKey"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="input_text">Value</label>
+                            <input type="text" class="form-control" id="input_text" placeholder="Please input anything you want to save"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary" onclick="saveData()">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
             
-            <div class="col-md-12">
-                <button type="button" class="btn btn-primary" onclick="nova.data.postMessage({action: 'load', key: 'testKey', callback: 'alert'});">Load</button>
+            <div class="row">
+                <div class="col-md-12">
+                    <form style="margin-top:36px;">
+                        <div class="form-group">
+                            <label for="load_key">Key</label>
+                            <input type="text" class="form-control" id="load_key" value="testKey"/>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-primary" onclick="nova.data.postMessage({action: 'load', key: $('#load_key').val(), callback: 'alert'});">Load</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
         
@@ -28,7 +45,8 @@
 
         <script>
             function saveData(data) {
-                nova.data.postMessage({action: 'save', key: 'testKey', value: $('#input_text').val()});
+                nova.data.postMessage({action: 'save', key: $('#input_key').val(), value: $('#input_text').val()});
+                alert('Successfully saved ' + $('#input_text').val() + ' for key ' + $('#input_key').val());
                 $('#input_text').val('');
             }
         </script>

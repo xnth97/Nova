@@ -103,15 +103,15 @@
 
 #pragma mark - Public methods
 
-- (void)evaluateJavaScript:(NSString *)javascript completionHandler:(void (^)(id _Nullable, NSError * _Nullable))completionHandler {
+- (void)evaluateJavaScript:(NSString *_Nonnull)javascript completionHandler:(void (^)(id _Nullable, NSError * _Nullable))completionHandler {
     [_rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
 }
 
-- (void)addMessageHandler:(id)handler forMessage:(NSString *)message {
+- (void)addMessageHandler:(id)handler forMessage:(NSString *_Nonnull)message {
     [_rootContentController addScriptMessageHandler:handler name:message];
 }
 
-- (NSString *)stringByEvaluatingJavaScript:(NSString *)javascript {
+- (NSString *_Nullable)stringByEvaluatingJavaScript:(NSString *_Nonnull)javascript {
     __block NSString *result = nil;
     __block BOOL finished = NO;
     
@@ -133,7 +133,7 @@
     return result;
 }
 
-- (void)setUserAgent:(NSString *)userAgent {
+- (void)setUserAgent:(NSString *_Nonnull)userAgent {
     _rootWebView.customUserAgent = userAgent;
 }
 

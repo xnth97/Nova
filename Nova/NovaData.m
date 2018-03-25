@@ -66,15 +66,16 @@
         
         NovaRootViewController *top = (NovaRootViewController *)topViewController;
         
-        NSString *paramString = @"";
+        NSString *js = @"";
         if ([value isKindOfClass:[NSString class]]) {
-            paramString = [self transcodingJavaScriptMessage:(NSString *) value];
+            NSString *paramString = [self transcodingJavaScriptMessage:(NSString *) value];
+            js = [NSString stringWithFormat:@"%@('%@');", callback, paramString];
         } else {
             NSError *error;
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:value options:0 error:&error];
-            paramString = [self transcodingJavaScriptMessage:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]];
+            NSString *paramString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            js = [NSString stringWithFormat:@"%@(%@);", callback, paramString];
         }
-        NSString *js = [NSString stringWithFormat:@"%@('%@');", callback, paramString];
         [top evaluateJavaScript:js completionHandler:nil];
         
     } else if ([action isEqualToString:@"remove"]) {
