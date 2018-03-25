@@ -72,7 +72,7 @@ _Pragma("clang diagnostic pop") \
         if (topViewController.navigationController != nil && [type isEqualToString:@"show"]) {
             [topViewController.navigationController showViewController:controllerToPush sender:nil];
         } else {
-            if ([parameters objectForKey:@"nav"] == nil) {
+            if ([parameters objectForKey:@"nav"] == nil || ![parameters[@"nav"] isEqualToString:@"true"]) {
                 [topViewController presentViewController:controllerToPush animated:YES completion:nil];
             } else {
                 UINavigationController *newNav = [[UINavigationController alloc] initWithRootViewController:controllerToPush];

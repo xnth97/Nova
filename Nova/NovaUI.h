@@ -1,5 +1,5 @@
 //
-//  NovaUIBridge.h
+//  NovaUI.h
 //  Nova
 //
 //  UI message handler of Nova. Handles 'ui' messages.
@@ -11,7 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
 
-@interface NovaUIBridge : NSObject <WKScriptMessageHandler>
+@interface NovaUI : NSObject <WKScriptMessageHandler>
 
 + (instancetype)sharedInstance;
 

@@ -1,5 +1,7 @@
 # Nova
 
+![](https://img.shields.io/cocoapods/v/Nova.svg)
+
 A lightweight HTML container for iOS.
 
 # Features
@@ -150,6 +152,33 @@ nova.ui.postMessage({ orientation: 'portrait' });
 
 `orientation` parameter has 3 values: `portrait`, `landscapeLeft` and `landscapeRight`.
 
+## Data
+
+### Key-Value storage
+
+#### Save
+
+Save value 'value_you_want_to_save' to key 'key_name'.
+
+```javascript
+nova.data.postMessage({ action: 'save', key: 'key_name', value: 'value_you_want_to_save'});
+```
+
+#### Load
+
+Load value from key 'key_name', then pass the loaded value to the function in callback field.
+
+```javascript
+nova.data.postMessage({ action: 'save', key: 'key_name', callback: 'alert' });
+```
+
+#### Remove
+
+Remove a key from KV storage.
+
+```javascript
+nova.data.postMessage({ action: 'remove', key: 'key_name' });
+```
 
 # TODO List
 

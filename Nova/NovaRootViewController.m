@@ -8,7 +8,8 @@
 
 #import "NovaRootViewController.h"
 #import "NovaNavigation.h"
-#import "NovaUIBridge.h"
+#import "NovaUI.h"
+#import "NovaData.h"
 #import <SafariServices/SafariServices.h>
 
 @interface NovaRootViewController ()<UIScrollViewDelegate, WKNavigationDelegate, WKUIDelegate>
@@ -39,13 +40,14 @@
     
     // Add initial JS scripts
     for (NSString *jsScript in _initialJSScripts) {
-        WKUserScript *tmpScript = [[WKUserScript alloc] initWithSource:jsScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+        WKUserScript *tmpScript = [[WKUserScript alloc] initWithSource:jsScript injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
         [_rootContentController addUserScript:tmpScript];
     }
     
     // Add message handlers
     [_rootContentController addScriptMessageHandler:[NovaNavigation sharedInstance] name:@"navigation"];
-    [_rootContentController addScriptMessageHandler:[NovaUIBridge sharedInstance] name:@"ui"];
+    [_rootContentController addScriptMessageHandler:[NovaUI sharedInstance] name:@"ui"];
+    [_rootContentController addScriptMessageHandler:[NovaData sharedInstance] name:@"data"];
     
     _rootConfiguration = [[WKWebViewConfiguration alloc] init];
     _rootConfiguration.userContentController = _rootContentController;
@@ -129,6 +131,10 @@
     }
     
     return result;
+}
+
+- (void)setUserAgent:(NSString *)userAgent {
+    _rootWebView.customUserAgent = userAgent;
 }
 
 #pragma mark - UIScrollViewDelegate

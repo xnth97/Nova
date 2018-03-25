@@ -1,19 +1,19 @@
 //
-//  NovaUIBridge.m
+//  NovaUI.m
 //  Nova
 //
 //  Created by Yubo Qin on 2018/2/1.
 //  Copyright © 2018 Yubo Qin. All rights reserved.
 //
 
-#import "NovaUIBridge.h"
+#import "NovaUI.h"
 #import <UIKit/UIKit.h>
 #import "NovaNavigation.h"
 #import "NovaRootViewController.h"
 #import "NovaBlockHolder.h"
 #import <objc/runtime.h>
 
-@implementation NovaUIBridge
+@implementation NovaUI
 
 + (instancetype)sharedInstance {
     static id sharedInstance;

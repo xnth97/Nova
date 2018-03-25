@@ -20,8 +20,11 @@
 		E97CA9AE20219DCA00A178A7 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA9AD20219DCA00A178A7 /* DemoViewController.m */; };
 		E985CC042025909600F2D292 /* navigation.html in Resources */ = {isa = PBXBuildFile; fileRef = E985CC032025909600F2D292 /* navigation.html */; };
 		E985CC062025919A00F2D292 /* ui.html in Resources */ = {isa = PBXBuildFile; fileRef = E985CC052025919A00F2D292 /* ui.html */; };
-		E990253F2022EF1200937F89 /* NovaUIBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E990253E2022EF1200937F89 /* NovaUIBridge.m */; };
+		E990253F2022EF1200937F89 /* NovaUI.m in Sources */ = {isa = PBXBuildFile; fileRef = E990253E2022EF1200937F89 /* NovaUI.m */; };
 		E9A941592026AC930085BF1F /* NovaBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A941582026AC930085BF1F /* NovaBlockHolder.m */; };
+		E9BAC5B42067559E009A8FC5 /* NovaData.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAC5B32067559E009A8FC5 /* NovaData.m */; };
+		E9BAC5B62067648B009A8FC5 /* data.html in Resources */ = {isa = PBXBuildFile; fileRef = E9BAC5B52067648B009A8FC5 /* data.html */; };
+		E9BAC5B820676493009A8FC5 /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E9BAC5B720676493009A8FC5 /* jquery.min.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,10 +47,14 @@
 		E97CA9AD20219DCA00A178A7 /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		E985CC032025909600F2D292 /* navigation.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = navigation.html; sourceTree = "<group>"; };
 		E985CC052025919A00F2D292 /* ui.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = ui.html; sourceTree = "<group>"; };
-		E990253D2022EF1200937F89 /* NovaUIBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaUIBridge.h; sourceTree = "<group>"; };
-		E990253E2022EF1200937F89 /* NovaUIBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaUIBridge.m; sourceTree = "<group>"; };
+		E990253D2022EF1200937F89 /* NovaUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaUI.h; sourceTree = "<group>"; };
+		E990253E2022EF1200937F89 /* NovaUI.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaUI.m; sourceTree = "<group>"; };
 		E9A941572026AC930085BF1F /* NovaBlockHolder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaBlockHolder.h; sourceTree = "<group>"; };
 		E9A941582026AC930085BF1F /* NovaBlockHolder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaBlockHolder.m; sourceTree = "<group>"; };
+		E9BAC5B22067559E009A8FC5 /* NovaData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaData.h; sourceTree = "<group>"; };
+		E9BAC5B32067559E009A8FC5 /* NovaData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaData.m; sourceTree = "<group>"; };
+		E9BAC5B52067648B009A8FC5 /* data.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = data.html; sourceTree = "<group>"; };
+		E9BAC5B720676493009A8FC5 /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,8 +109,10 @@
 				E97CA9A12021904900A178A7 /* NovaRootViewController.m */,
 				E9689D222022360200045D69 /* NovaNavigation.h */,
 				E9689D232022360200045D69 /* NovaNavigation.m */,
-				E990253D2022EF1200937F89 /* NovaUIBridge.h */,
-				E990253E2022EF1200937F89 /* NovaUIBridge.m */,
+				E9BAC5B22067559E009A8FC5 /* NovaData.h */,
+				E9BAC5B32067559E009A8FC5 /* NovaData.m */,
+				E990253D2022EF1200937F89 /* NovaUI.h */,
+				E990253E2022EF1200937F89 /* NovaUI.m */,
 				E9A941572026AC930085BF1F /* NovaBlockHolder.h */,
 				E9A941582026AC930085BF1F /* NovaBlockHolder.m */,
 			);
@@ -115,8 +124,10 @@
 			children = (
 				E97CA9A620219B6800A178A7 /* bootstrap.min.css */,
 				E97CA9A720219B6800A178A7 /* bootstrap.min.js */,
+				E9BAC5B52067648B009A8FC5 /* data.html */,
 				E97CA9A820219B6800A178A7 /* demo.html */,
 				E985CC032025909600F2D292 /* navigation.html */,
+				E9BAC5B720676493009A8FC5 /* jquery.min.js */,
 				E985CC052025919A00F2D292 /* ui.html */,
 			);
 			path = Resources;
@@ -182,11 +193,13 @@
 			files = (
 				E985CC062025919A00F2D292 /* ui.html in Resources */,
 				E97CA9A920219B6800A178A7 /* bootstrap.min.css in Resources */,
+				E9BAC5B820676493009A8FC5 /* jquery.min.js in Resources */,
 				E97CA9AB20219B6800A178A7 /* demo.html in Resources */,
 				E97CA9962021902A00A178A7 /* LaunchScreen.storyboard in Resources */,
 				E97CA9AA20219B6800A178A7 /* bootstrap.min.js in Resources */,
 				E985CC042025909600F2D292 /* navigation.html in Resources */,
 				E97CA9932021902A00A178A7 /* Assets.xcassets in Resources */,
+				E9BAC5B62067648B009A8FC5 /* data.html in Resources */,
 				E97CA9912021902A00A178A7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,9 +211,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E990253F2022EF1200937F89 /* NovaUIBridge.m in Sources */,
+				E990253F2022EF1200937F89 /* NovaUI.m in Sources */,
 				E9A941592026AC930085BF1F /* NovaBlockHolder.m in Sources */,
 				E97CA9992021902A00A178A7 /* main.m in Sources */,
+				E9BAC5B42067559E009A8FC5 /* NovaData.m in Sources */,
 				E97CA9A22021904900A178A7 /* NovaRootViewController.m in Sources */,
 				E9689D242022360200045D69 /* NovaNavigation.m in Sources */,
 				E97CA9AE20219DCA00A178A7 /* DemoViewController.m in Sources */,
@@ -339,10 +353,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 66YTFN7WTB;
 				INFOPLIST_FILE = NovaDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.yuboqin.Nova;
+				PRODUCT_BUNDLE_IDENTIFIER = me.yuboqin.Nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -353,10 +368,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 66YTFN7WTB;
 				INFOPLIST_FILE = NovaDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = io.yuboqin.Nova;
+				PRODUCT_BUNDLE_IDENTIFIER = me.yuboqin.Nova;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

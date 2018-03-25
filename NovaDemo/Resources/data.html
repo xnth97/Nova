@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-md-12">
+                <form style="margin-top: 36px;">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="input_text" placeholder="Please input anything you want to save"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="saveData()">Save</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="col-md-12">
+                <button type="button" class="btn btn-primary" onclick="nova.data.postMessage({action: 'load', key: 'testKey', callback: 'alert'});">Load</button>
+            </div>
+        </div>
+        
+        <script src="bootstrap.min.js"></script>
+        <script src="jquery.min.js"></script>
+
+        <script>
+            function saveData(data) {
+                nova.data.postMessage({action: 'save', key: 'testKey', value: $('#input_text').val()});
+                $('#input_text').val('');
+            }
+        </script>
+    </body>
+</html>

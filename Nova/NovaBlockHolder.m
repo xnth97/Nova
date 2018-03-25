@@ -10,16 +10,23 @@
 
 @interface NovaBlockHolder ()
 
-@property (copy, nonatomic) dispatch_block_t block;
+@property (copy, nonatomic, readonly) dispatch_block_t block;
 
 @end
 
 @implementation NovaBlockHolder
 
 + (id)blockHolderWithBlock:(dispatch_block_t)block {
-    NovaBlockHolder *instance = [[self alloc] init];
-    instance.block = block;
+    NovaBlockHolder *instance = [[self alloc] initWithBlock:block];
     return instance;
+}
+
+- (id)initWithBlock:(dispatch_block_t)block {
+    self = [super init];
+    if (self) {
+        _block = block;
+    }
+    return self;
 }
 
 - (void)invoke {
