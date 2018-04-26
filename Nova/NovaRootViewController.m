@@ -10,6 +10,7 @@
 #import "NovaNavigation.h"
 #import "NovaUI.h"
 #import "NovaData.h"
+#import "NovaBridge.h"
 #import <SafariServices/SafariServices.h>
 
 @interface NovaRootViewController ()<UIScrollViewDelegate, WKNavigationDelegate, WKUIDelegate>
@@ -48,6 +49,8 @@
     [_rootContentController addScriptMessageHandler:[NovaNavigation sharedInstance] name:@"navigation"];
     [_rootContentController addScriptMessageHandler:[NovaUI sharedInstance] name:@"ui"];
     [_rootContentController addScriptMessageHandler:[NovaData sharedInstance] name:@"data"];
+    [_rootContentController addScriptMessageHandler:[NovaBridge sharedInstance] name:@"bridge"];
+    [[NovaBridge sharedInstance] setSelfController:self];
     
     _rootConfiguration = [[WKWebViewConfiguration alloc] init];
     _rootConfiguration.userContentController = _rootContentController;

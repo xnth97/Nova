@@ -152,9 +152,43 @@ nova.ui.postMessage({ orientation: 'portrait' });
 
 `orientation` parameter has 3 values: `portrait`, `landscapeLeft` and `landscapeRight`.
 
+## Bridge
+
+Nova allows you to directly execute Objective-C native methods and use the return value as parameters in JavaScript callback functions.
+
+### Basic Usage
+
+```javascript
+nova.bridge.postMessage({
+    func: 'getSystemInfo',
+    callback: 'updateUI',
+});
+```
+
+This would execute the `getSystemInfo:` method in current `NovaRootViewController` instance, and pass its return value to `updateUI()` function in JavaScript. Note that you may want to use your own subclass of `NovaRootViewController` while invoking native functions.
+
+`callback` is an optional field.
+
+### Another Class and Parameters
+
+```javascript
+nova.bridge.postMessage({
+    class: 'TestClass',
+    func: 'getSystemInfo:',
+    param: 'aParameter',
+    callback: 'updateUI',
+});
+```
+
+This would execute the class method `[TestClass getSystemInfo:aParameter]`, and pass its return value to `updateUI()` function in JavaScript. Note that currently only ONE parameter is supported. Please design your method properly.
+
+When using parameters, please write `func` field as the string representation of a `SEL` selector. The ':' symbol is required. `class`, `param` and `callback` are optional fields.
+
 ## Data
 
 ### Key-Value storage
+
+Nova provides a very simple key-value storage which allows you to save and retrieve persistent data via WKWebView. 
 
 #### Save
 

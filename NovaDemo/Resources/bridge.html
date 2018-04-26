@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="col-12">
+                <table class="table">
+                    <br/>
+                    <h4>System Info</h4>
+                    <br/>
+                    <tbody>
+                        <tr>
+                            <td>OS</td>
+                            <td id="os_version"></td>
+                        </tr>
+                        <tr>
+                            <td>Processor Count</td>
+                            <td id="cpu_count"></td>
+                        </tr>
+                        <tr>
+                            <td>Physical Memory</td>
+                            <td id="physical_mem"></td>
+                        </tr>
+                        <tr>
+                            <td>Additional</td>
+                            <td id="additional"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <script src="bootstrap.min.js"></script>
+        <script src="jquery.min.js"></script>
+        <script>
+            nova.bridge.postMessage({
+                func: 'getSystemInfo:',
+                callback: 'updateUI',
+                param: 'Just an additional string',
+            });
+
+            function updateUI(val) {
+                $('#os_version').html(val['os']);
+                $('#cpu_count').html(val['cpu']);
+                $('#physical_mem').html(val['mem']);
+                $('#additional').html(val['additional']);
+            }
+        </script>
+    </body>
+</html>
+
+

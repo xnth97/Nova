@@ -25,6 +25,9 @@
 		E9BAC5B42067559E009A8FC5 /* NovaData.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BAC5B32067559E009A8FC5 /* NovaData.m */; };
 		E9BAC5B62067648B009A8FC5 /* data.html in Resources */ = {isa = PBXBuildFile; fileRef = E9BAC5B52067648B009A8FC5 /* data.html */; };
 		E9BAC5B820676493009A8FC5 /* jquery.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E9BAC5B720676493009A8FC5 /* jquery.min.js */; };
+		E9FDFDA020914FC10071C998 /* NovaBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FDFD9F20914FC10071C998 /* NovaBridge.m */; };
+		E9FDFDA2209156240071C998 /* bridge.html in Resources */ = {isa = PBXBuildFile; fileRef = E9FDFDA1209156240071C998 /* bridge.html */; };
+		E9FDFDA52091566D0071C998 /* BridgeDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FDFDA42091566D0071C998 /* BridgeDemoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,11 @@
 		E9BAC5B32067559E009A8FC5 /* NovaData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaData.m; sourceTree = "<group>"; };
 		E9BAC5B52067648B009A8FC5 /* data.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = data.html; sourceTree = "<group>"; };
 		E9BAC5B720676493009A8FC5 /* jquery.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.min.js; sourceTree = "<group>"; };
+		E9FDFD9E20914FC10071C998 /* NovaBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaBridge.h; sourceTree = "<group>"; };
+		E9FDFD9F20914FC10071C998 /* NovaBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaBridge.m; sourceTree = "<group>"; };
+		E9FDFDA1209156240071C998 /* bridge.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = bridge.html; sourceTree = "<group>"; };
+		E9FDFDA32091566C0071C998 /* BridgeDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BridgeDemoViewController.h; sourceTree = "<group>"; };
+		E9FDFDA42091566D0071C998 /* BridgeDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BridgeDemoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +101,8 @@
 				E97CA98A2021902A00A178A7 /* AppDelegate.m */,
 				E97CA9AC20219DCA00A178A7 /* DemoViewController.h */,
 				E97CA9AD20219DCA00A178A7 /* DemoViewController.m */,
+				E9FDFDA32091566C0071C998 /* BridgeDemoViewController.h */,
+				E9FDFDA42091566D0071C998 /* BridgeDemoViewController.m */,
 				E97CA98F2021902A00A178A7 /* Main.storyboard */,
 				E97CA9922021902A00A178A7 /* Assets.xcassets */,
 				E97CA9942021902A00A178A7 /* LaunchScreen.storyboard */,
@@ -115,6 +125,8 @@
 				E990253E2022EF1200937F89 /* NovaUI.m */,
 				E9A941572026AC930085BF1F /* NovaBlockHolder.h */,
 				E9A941582026AC930085BF1F /* NovaBlockHolder.m */,
+				E9FDFD9E20914FC10071C998 /* NovaBridge.h */,
+				E9FDFD9F20914FC10071C998 /* NovaBridge.m */,
 			);
 			path = Nova;
 			sourceTree = "<group>";
@@ -122,6 +134,7 @@
 		E97CA9A520219B6800A178A7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E9FDFDA1209156240071C998 /* bridge.html */,
 				E97CA9A620219B6800A178A7 /* bootstrap.min.css */,
 				E97CA9A720219B6800A178A7 /* bootstrap.min.js */,
 				E9BAC5B52067648B009A8FC5 /* data.html */,
@@ -196,6 +209,7 @@
 				E9BAC5B820676493009A8FC5 /* jquery.min.js in Resources */,
 				E97CA9AB20219B6800A178A7 /* demo.html in Resources */,
 				E97CA9962021902A00A178A7 /* LaunchScreen.storyboard in Resources */,
+				E9FDFDA2209156240071C998 /* bridge.html in Resources */,
 				E97CA9AA20219B6800A178A7 /* bootstrap.min.js in Resources */,
 				E985CC042025909600F2D292 /* navigation.html in Resources */,
 				E97CA9932021902A00A178A7 /* Assets.xcassets in Resources */,
@@ -215,10 +229,12 @@
 				E9A941592026AC930085BF1F /* NovaBlockHolder.m in Sources */,
 				E97CA9992021902A00A178A7 /* main.m in Sources */,
 				E9BAC5B42067559E009A8FC5 /* NovaData.m in Sources */,
+				E9FDFDA52091566D0071C998 /* BridgeDemoViewController.m in Sources */,
 				E97CA9A22021904900A178A7 /* NovaRootViewController.m in Sources */,
 				E9689D242022360200045D69 /* NovaNavigation.m in Sources */,
 				E97CA9AE20219DCA00A178A7 /* DemoViewController.m in Sources */,
 				E97CA98B2021902A00A178A7 /* AppDelegate.m in Sources */,
+				E9FDFDA020914FC10071C998 /* NovaBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +369,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66YTFN7WTB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NovaDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -368,7 +384,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 66YTFN7WTB;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NovaDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
