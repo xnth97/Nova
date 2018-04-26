@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
+#import "NovaRootViewController.h"
 
 #define SuppressPerformSelectorLeakWarning(Stuff) \
 do { \
@@ -19,11 +20,12 @@ _Pragma("clang diagnostic pop") \
 
 @interface NovaBridge : NSObject <WKScriptMessageHandler>
 
-@property (weak, nonatomic) UIViewController *selfController;
+@property (weak, nonatomic) NovaRootViewController *selfController;
 
 + (instancetype)sharedInstance;
 
 + (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param;
++ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param inViewController:(NovaRootViewController *)viewController;
 + (NSString *)transcodingJavaScriptMessage:(NSString *)message;
 
 @end

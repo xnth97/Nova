@@ -107,7 +107,13 @@
 #pragma mark - Public methods
 
 - (void)evaluateJavaScript:(NSString *_Nonnull)javascript completionHandler:(void (^)(id _Nullable, NSError * _Nullable))completionHandler {
-    [_rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
+    if ([[NSThread currentThread] isMainThread]) {
+        [_rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [_rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
+        });
+    }
 }
 
 - (void)addMessageHandler:(id)handler forMessage:(NSString *_Nonnull)message {

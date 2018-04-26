@@ -32,42 +32,35 @@
     NSString *funcName = [param objectForKey:@"func"];
     NSObject *parameters = [param objectForKey:@"param"];
     SEL selector = NSSelectorFromString(funcName);
-    NSObject *retVal = nil;
-    if ([param objectForKey:@"class"] == nil) {
-        // send to self
-        if (parameters != nil) {
-            SuppressPerformSelectorLeakWarning(
-                retVal = [_selfController performSelector:selector withObject:parameters];
-            );
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        NSObject *retVal = nil;
+        if ([param objectForKey:@"class"] == nil) {
+            // send to self
+            if (parameters != nil) {
+                SuppressPerformSelectorLeakWarning(retVal = [_selfController performSelector:selector withObject:parameters];);
+            } else {
+                SuppressPerformSelectorLeakWarning(retVal = [_selfController performSelector:selector];);
+            }
+            
         } else {
-            SuppressPerformSelectorLeakWarning(retVal = [_selfController performSelector:selector];);
+            NSString *className = [param objectForKey:@"class"];
+            Class cls = NSClassFromString(className);
+            if (parameters != nil) {
+                SuppressPerformSelectorLeakWarning(retVal = [cls performSelector:selector withObject:parameters];);
+            } else {
+                SuppressPerformSelectorLeakWarning(retVal = [cls performSelector:selector];);
+            }
         }
         
-    } else {
-        NSString *className = [param objectForKey:@"class"];
-        Class cls = NSClassFromString(className);
-        if (parameters != nil) {
-            SuppressPerformSelectorLeakWarning(retVal = [cls performSelector:selector withObject:parameters];);
-        } else {
-            SuppressPerformSelectorLeakWarning(retVal = [cls performSelector:selector];);
+        if ([param objectForKey:@"callback"] != nil) {
+            NSString *callback = [param objectForKey:@"callback"];
+            [[self class] executeCallback:callback withParameter:retVal inViewController:self.selfController];
         }
-    }
-    
-    if ([param objectForKey:@"callback"] != nil) {
-        NSString *callback = [param objectForKey:@"callback"];
-        [[self class] executeCallback:callback withParameter:retVal];
-    }
+    });
 }
 
-+ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param {
-    // currently we suppose that our target NovaRootViewController is the top view controller.
-    UIViewController *topViewController = [NovaNavigation topViewController];
-    if ([topViewController isKindOfClass:[NovaRootViewController class]] == NO) {
-        return;
-    }
-    
-    NovaRootViewController *top = (NovaRootViewController *)topViewController;
-    
++ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param inViewController:(NovaRootViewController *)viewController {
     NSString *js = @"";
     if ([param isKindOfClass:[NSString class]]) {
         NSString *paramString = [self transcodingJavaScriptMessage:(NSString *) param];
@@ -78,13 +71,17 @@
         NSString *paramString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         js = [NSString stringWithFormat:@"%@(%@);", callback, paramString];
     }
-    if ([[NSThread currentThread] isMainThread]) {
-        [top evaluateJavaScript:js completionHandler:nil];
-    } else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            [top evaluateJavaScript:js completionHandler:nil];
-        });
+    [viewController evaluateJavaScript:js completionHandler:nil];
+}
+
++ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param {
+    // currently we suppose that our target NovaRootViewController is the top view controller.
+    UIViewController *topViewController = [NovaNavigation topViewController];
+    if ([topViewController isKindOfClass:[NovaRootViewController class]] == NO) {
+        return;
     }
+    NovaRootViewController *top = (NovaRootViewController *)topViewController;
+    [[self class] executeCallback:callback withParameter:param inViewController:top];
 }
 
 + (NSString *)transcodingJavaScriptMessage:(NSString *)message {
