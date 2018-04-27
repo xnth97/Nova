@@ -50,7 +50,6 @@
     [_rootContentController addScriptMessageHandler:[NovaUI sharedInstance] name:@"ui"];
     [_rootContentController addScriptMessageHandler:[NovaData sharedInstance] name:@"data"];
     [_rootContentController addScriptMessageHandler:[NovaBridge sharedInstance] name:@"bridge"];
-    [[NovaBridge sharedInstance] setSelfController:self];
     
     _rootConfiguration = [[WKWebViewConfiguration alloc] init];
     _rootConfiguration.userContentController = _rootContentController;
@@ -67,6 +66,12 @@
     [self loadUrl:_url];
     
     self.view = _rootWebView;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NovaBridge sharedInstance] setSelfController:self];
+    [[NovaData sharedInstance] setSelfController:self];
 }
 
 - (void)didReceiveMemoryWarning {

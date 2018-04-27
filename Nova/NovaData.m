@@ -57,7 +57,7 @@
         }
         
         NSString *callback = parameters[@"callback"];
-        [NovaBridge executeCallback:callback withParameter:value];
+        [NovaBridge executeCallback:callback withParameter:value inViewController:_selfController];
         
     } else if ([action isEqualToString:@"remove"]) {
         [self.cache removeObjectForKey:key];

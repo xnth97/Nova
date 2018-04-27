@@ -11,8 +11,11 @@
 
 #import <Foundation/Foundation.h>
 #import <WebKit/WebKit.h>
+#import "NovaRootViewController.h"
 
 @interface NovaData : NSObject <WKScriptMessageHandler>
+
+@property (weak, nonatomic) NovaRootViewController *selfController;
 
 + (instancetype)sharedInstance;
 
