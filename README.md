@@ -12,6 +12,8 @@ A lightweight HTML container for iOS.
 * Modulized MessageHandlers
 * Dynamically initialize ViewControllers and pass parameters
 * JavaScript callback from native UI components
+* Simple key-value data persistence
+* Invoke native Objective-C methods and callback in JavaScript
 
 # Screenshot
 
@@ -47,6 +49,38 @@ nova.navigation.postMessage({type: 'show', class: 'DemoViewController'});
 
 Pass a `class` parameter. This method will initialize a new instance of `class` that you passed. Also, parameters other than `type`, `class`, `nav` would be automatically added to the instance. Please make sure that `class` is a subclass of `UIViewController`.
 
+## Bridge
+
+Nova allows you to directly execute Objective-C native methods and use the return value as parameters in JavaScript callback functions.
+
+### Basic Usage
+
+```javascript
+nova.bridge.postMessage({
+    func: 'getSystemInfo',
+    callback: 'updateUI',
+});
+```
+
+This would execute the `getSystemInfo:` method in current `NovaRootViewController` instance, and pass its return value to `updateUI()` function in JavaScript. Note that you may want to use your own subclass of `NovaRootViewController` while invoking native functions.
+
+`callback` is an optional field.
+
+### Class and Parameters
+
+```javascript
+nova.bridge.postMessage({
+    class: 'TestClass',
+    func: 'getSystemInfo:',
+    param: 'aParameter',
+    callback: 'updateUI',
+});
+```
+
+This would execute the class method `[TestClass getSystemInfo:aParameter]`, and pass its return value to `updateUI()` function in JavaScript. Note that currently only ONE parameter is supported. Please design your method properly.
+
+When using parameters, please write `func` field as the string representation of a `SEL` selector. The ':' symbol is required. `class`, `param` and `callback` are optional fields.
+
 ## UI
 
 ### Alert
@@ -56,6 +90,8 @@ Pass a `class` parameter. This method will initialize a new instance of `class` 
 ```javascript
 alert('message here');
 ```
+
+The default title is the application's bundle display name. To change this, simply modify the `alertTitle` property of your `NovaRootViewController` class.
 
 #### Custom Alert
 
@@ -77,6 +113,8 @@ nova.ui.postMessage({ alert: {
 ```
 
 `style` parameter has 3 possible values: `cancel`, `destructive` and `default`. Each of them is the same with corresponding `UIAlertActionStyle` enum value. 
+
+The `callback` parameter can also be replaced with a `bridge` parameter, which should be a dictionary that is same as described in __Bridge__ section.
 
 ### ActionSheet
 
@@ -144,6 +182,28 @@ You can either use `style` or `title` parameter to customize the button, but onl
 }
 ```
 
+The `callback` parameter can also be replaced with `bridge`.
+
+### Multiple NavigationBar Buttons
+
+```javascript
+nova.ui.postMessage({
+    rightBarButtons: [{
+        style: 'add', 
+        bridge: {
+            func: 'getSystemInfo:',
+            callback: 'updateUI',
+            param: 'Another additional string',
+        }
+    }, {
+        style: 'action', 
+        callback: 'alert(\'This is a UIBarButtonItem\');',
+    }]
+});
+```
+
+`leftBarButtons` is also supported.
+
 ### Orientation
 
 ```javascript
@@ -151,38 +211,6 @@ nova.ui.postMessage({ orientation: 'portrait' });
 ```
 
 `orientation` parameter has 3 values: `portrait`, `landscapeLeft` and `landscapeRight`.
-
-## Bridge
-
-Nova allows you to directly execute Objective-C native methods and use the return value as parameters in JavaScript callback functions.
-
-### Basic Usage
-
-```javascript
-nova.bridge.postMessage({
-    func: 'getSystemInfo',
-    callback: 'updateUI',
-});
-```
-
-This would execute the `getSystemInfo:` method in current `NovaRootViewController` instance, and pass its return value to `updateUI()` function in JavaScript. Note that you may want to use your own subclass of `NovaRootViewController` while invoking native functions.
-
-`callback` is an optional field.
-
-### Another Class and Parameters
-
-```javascript
-nova.bridge.postMessage({
-    class: 'TestClass',
-    func: 'getSystemInfo:',
-    param: 'aParameter',
-    callback: 'updateUI',
-});
-```
-
-This would execute the class method `[TestClass getSystemInfo:aParameter]`, and pass its return value to `updateUI()` function in JavaScript. Note that currently only ONE parameter is supported. Please design your method properly.
-
-When using parameters, please write `func` field as the string representation of a `SEL` selector. The ':' symbol is required. `class`, `param` and `callback` are optional fields.
 
 ## Data
 
@@ -219,9 +247,9 @@ nova.data.postMessage({ action: 'remove', key: 'key_name' });
 - [ ] Provide more native UIKit APIs
 - [ ] JSCore to process JSValue and ObjC objects
 - [ ] Safe area
-- [ ] Runtime method invocation
+- [x] Runtime method invocation
 - [ ] Swift compatibility
-- [ ] UA
+- [x] UA
 
 # License
 

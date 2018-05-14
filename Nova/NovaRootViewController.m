@@ -68,8 +68,8 @@
     self.view = _rootWebView;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [[NovaBridge sharedInstance] setSelfController:self];
     [[NovaData sharedInstance] setSelfController:self];
 }
@@ -209,7 +209,8 @@
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] message:message preferredStyle:UIAlertControllerStyleAlert];
+    NSString *title = _alertTitle == nil ?  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] : _alertTitle;
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancel];
     [self presentViewController:alert animated:YES completion:nil];

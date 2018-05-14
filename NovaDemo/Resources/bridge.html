@@ -42,6 +42,16 @@
                 callback: 'updateUI',
                 param: 'Just an additional string',
             });
+            nova.ui.postMessage({
+                rightBarButton: {
+                    style: 'add', 
+                    bridge: {
+                        func: 'getSystemInfo:',
+                        callback: 'updateUI',
+                        param: 'Another additional string, which is added by this UIBarButtonItem'
+                    }
+                },
+            });
 
             function updateUI(val) {
                 $('#os_version').html(val['os']);

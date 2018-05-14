@@ -11,6 +11,7 @@
 #import "NovaNavigation.h"
 #import "NovaRootViewController.h"
 #import "NovaBlockHolder.h"
+#import "NovaBridge.h"
 #import <objc/runtime.h>
 
 @implementation NovaUI
@@ -38,10 +39,14 @@
     if ([parameters objectForKey:@"orientation"] != nil) {
         [self constructOrientation:parameters[@"orientation"]];
     }
-    if ([parameters objectForKey:@"leftBarButton"] != nil) {
+    if ([parameters objectForKey:@"leftBarButtons"] != nil) {
+        [self constructBarButtons:parameters[@"leftBarButtons"] direction:0];
+    } else if ([parameters objectForKey:@"leftBarButton"] != nil) {
         [self constructBarButton:parameters[@"leftBarButton"] direction:0];
     }
-    if ([parameters objectForKey:@"rightBarButton"] != nil) {
+    if ([parameters objectForKey:@"rightBarButtons"] != nil) {
+        [self constructBarButtons:parameters[@"rightBarButtons"] direction:1];
+    } else if ([parameters objectForKey:@"rightBarButton"] != nil) {
         [self constructBarButton:parameters[@"rightBarButton"] direction:1];
     }
     if ([parameters objectForKey:@"activity"] != nil) {
@@ -67,7 +72,9 @@
                 }
             }
             UIAlertAction *action = [UIAlertAction actionWithTitle:actionParam[@"title"] style:s handler:^(UIAlertAction *_action) {
-                if ([actionParam objectForKey:@"callback"] != nil) {
+                if ([actionParam objectForKey:@"bridge"] != nil) {
+                    [[NovaBridge sharedInstance] callNativeFunction:actionParam[@"bridge"]];
+                } else if ([actionParam objectForKey:@"callback"] != nil) {
                     if ([top isKindOfClass:[NovaRootViewController class]]) {
                         [((NovaRootViewController *)top) evaluateJavaScript:[actionParam objectForKey:@"callback"] completionHandler:nil];
                     }
@@ -96,52 +103,80 @@
     }
 }
 
-- (void)constructBarButton:(NSDictionary *)parameters direction:(NSUInteger)direction {
-    NSString *title = parameters[@"title"];
-    NSString *callback = parameters[@"callback"];
-    NSString *style = parameters[@"style"];
-    NovaBlockHolder *blockHolder = [NovaBlockHolder blockHolderWithBlock:^() {
-        [(NovaRootViewController *)[NovaNavigation topViewController] evaluateJavaScript:callback completionHandler:nil];
-    }];
-    dispatch_async(dispatch_get_main_queue(), ^() {
-        UIBarButtonItem *barButtonItem;
-        if (title == nil && style != nil) {
-            NSDictionary<NSString *, NSNumber *> *styleDict = @{@"add": @(UIBarButtonSystemItemAdd),
-                                                                @"done": @(UIBarButtonSystemItemDone),
-                                                                @"cancel": @(UIBarButtonSystemItemCancel),
-                                                                @"edit": @(UIBarButtonSystemItemEdit),
-                                                                @"save": @(UIBarButtonSystemItemSave),
-                                                                @"camera": @(UIBarButtonSystemItemCamera),
-                                                                @"trash": @(UIBarButtonSystemItemTrash),
-                                                                @"reply": @(UIBarButtonSystemItemReply),
-                                                                @"action": @(UIBarButtonSystemItemAction),
-                                                                @"organize": @(UIBarButtonSystemItemOrganize),
-                                                                @"compose": @(UIBarButtonSystemItemCompose),
-                                                                @"refresh": @(UIBarButtonSystemItemRefresh),
-                                                                @"bookmarks": @(UIBarButtonSystemItemBookmarks),
-                                                                @"search": @(UIBarButtonSystemItemSearch),
-                                                                @"stop": @(UIBarButtonSystemItemStop),
-                                                                @"play": @(UIBarButtonSystemItemPlay),
-                                                                @"pause": @(UIBarButtonSystemItemPause),
-                                                                @"redo": @(UIBarButtonSystemItemRedo),
-                                                                @"undo": @(UIBarButtonSystemItemUndo),
-                                                                @"rewind": @(UIBarButtonSystemItemRewind),
-                                                                @"fastforward": @(UIBarButtonSystemItemFastForward)
-                                                                };
-            barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:styleDict[style].integerValue target:blockHolder action:@selector(invoke)];
-        } else if (title != nil) {
-            barButtonItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:blockHolder action:@selector(invoke)];
+- (void)constructBarButtons:(NSArray<NSDictionary *> *)paramArray direction:(NSUInteger)direction {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSMutableArray<UIBarButtonItem *> *barItems = [[NSMutableArray alloc] init];
+        for (NSDictionary *parameters in paramArray) {
+            [barItems addObject:[self buildBarButtonItem:parameters]];
         }
+        if (direction == 0) {
+            [[NovaNavigation topViewController].navigationItem setLeftBarButtonItems:barItems];
+        } else {
+            [[NovaNavigation topViewController].navigationItem setRightBarButtonItems:barItems];
+        }
+    });
+}
+
+- (void)constructBarButton:(NSDictionary *)parameters direction:(NSUInteger)direction {
+    dispatch_async(dispatch_get_main_queue(), ^() {
+        UIBarButtonItem *barButtonItem = [self buildBarButtonItem:parameters];
         if (direction == 0) {
             [[NovaNavigation topViewController].navigationItem setLeftBarButtonItem:barButtonItem];
         } else {
             [[NovaNavigation topViewController].navigationItem setRightBarButtonItem:barButtonItem];
         }
-        // Note that the blockHolder instance won't be retained, therefore we use
-        // ObjC's setAssociatedObject to tie the lifetime of blockHolder to the lifetime
-        // of the control.
-        objc_setAssociatedObject(barButtonItem, @"__block_holder__", blockHolder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     });
+}
+
+- (UIBarButtonItem *)buildBarButtonItem:(NSDictionary *)parameters {
+    NSString *title = parameters[@"title"];
+    NSString *style = parameters[@"style"];
+    NovaBlockHolder *blockHolder;
+    if ([parameters objectForKey:@"bridge"] != nil) {
+        blockHolder = [NovaBlockHolder blockHolderWithBlock:^() {
+            [[NovaBridge sharedInstance] callNativeFunction:parameters[@"bridge"]];
+        }];
+    } else if ([parameters objectForKey:@"callback"] != nil) {
+        blockHolder = [NovaBlockHolder blockHolderWithBlock:^() {
+            [(NovaRootViewController *)[NovaNavigation topViewController] evaluateJavaScript:parameters[@"callback"] completionHandler:nil];
+        }];
+    }
+    
+    UIBarButtonItem *barButtonItem;
+    if (title == nil && style != nil) {
+        NSDictionary<NSString *, NSNumber *> *styleDict = @{@"add": @(UIBarButtonSystemItemAdd),
+                                                            @"done": @(UIBarButtonSystemItemDone),
+                                                            @"cancel": @(UIBarButtonSystemItemCancel),
+                                                            @"edit": @(UIBarButtonSystemItemEdit),
+                                                            @"save": @(UIBarButtonSystemItemSave),
+                                                            @"camera": @(UIBarButtonSystemItemCamera),
+                                                            @"trash": @(UIBarButtonSystemItemTrash),
+                                                            @"reply": @(UIBarButtonSystemItemReply),
+                                                            @"action": @(UIBarButtonSystemItemAction),
+                                                            @"organize": @(UIBarButtonSystemItemOrganize),
+                                                            @"compose": @(UIBarButtonSystemItemCompose),
+                                                            @"refresh": @(UIBarButtonSystemItemRefresh),
+                                                            @"bookmarks": @(UIBarButtonSystemItemBookmarks),
+                                                            @"search": @(UIBarButtonSystemItemSearch),
+                                                            @"stop": @(UIBarButtonSystemItemStop),
+                                                            @"play": @(UIBarButtonSystemItemPlay),
+                                                            @"pause": @(UIBarButtonSystemItemPause),
+                                                            @"redo": @(UIBarButtonSystemItemRedo),
+                                                            @"undo": @(UIBarButtonSystemItemUndo),
+                                                            @"rewind": @(UIBarButtonSystemItemRewind),
+                                                            @"fastforward": @(UIBarButtonSystemItemFastForward)
+                                                            };
+        barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:styleDict[style].integerValue target:blockHolder action:@selector(invoke)];
+    } else if (title != nil) {
+        barButtonItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:blockHolder action:@selector(invoke)];
+    }
+    
+    // Note that the blockHolder instance won't be retained, therefore we use
+    // ObjC's setAssociatedObject to tie the lifetime of blockHolder to the lifetime
+    // of the control.
+    objc_setAssociatedObject(barButtonItem, @"__block_holder__", blockHolder, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    return barButtonItem;
 }
 
 - (void)constructActivity:(NSDictionary *)parameters {

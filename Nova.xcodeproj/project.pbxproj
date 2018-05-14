@@ -117,6 +117,8 @@
 			children = (
 				E97CA9A02021904900A178A7 /* NovaRootViewController.h */,
 				E97CA9A12021904900A178A7 /* NovaRootViewController.m */,
+				E9FDFD9E20914FC10071C998 /* NovaBridge.h */,
+				E9FDFD9F20914FC10071C998 /* NovaBridge.m */,
 				E9689D222022360200045D69 /* NovaNavigation.h */,
 				E9689D232022360200045D69 /* NovaNavigation.m */,
 				E9BAC5B22067559E009A8FC5 /* NovaData.h */,
@@ -125,8 +127,6 @@
 				E990253E2022EF1200937F89 /* NovaUI.m */,
 				E9A941572026AC930085BF1F /* NovaBlockHolder.h */,
 				E9A941582026AC930085BF1F /* NovaBlockHolder.m */,
-				E9FDFD9E20914FC10071C998 /* NovaBridge.h */,
-				E9FDFD9F20914FC10071C998 /* NovaBridge.m */,
 			);
 			path = Nova;
 			sourceTree = "<group>";

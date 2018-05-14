@@ -29,6 +29,10 @@
     return shared;
 }
 
+- (void)dealloc {
+    _selfController = nil;
+}
+
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if (![message.name isEqualToString:@"data"]) {
         return;

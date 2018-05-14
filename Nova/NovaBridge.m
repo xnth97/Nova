@@ -42,13 +42,20 @@
     _setControllerTime = [[NSDate date] timeIntervalSince1970];
 }
 
+- (void)dealloc {
+    _selfController = nil;
+}
+
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
     if (![message.name isEqualToString:@"bridge"]) {
         return;
     }
     
     NSDictionary *param = message.body;
-    
+    [self callNativeFunction:param];
+}
+
+- (void)callNativeFunction:(NSDictionary *)param {
     NSString *funcName = [param objectForKey:@"func"];
     NSObject *parameters = [param objectForKey:@"param"];
     SEL selector = NSSelectorFromString(funcName);
