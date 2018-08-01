@@ -9,11 +9,11 @@
 #import "NovaData.h"
 #import "NovaBridge.h"
 
-#define NOVA_KV_STORAGE_KEY @"NOVA_KV_STORAGE"
+static NSString * const NOVA_KV_STORAGE_KEY = @"NOVA_KV_STORAGE";
 
 @interface NovaData ()
 
-@property (strong, nonatomic) NSMutableDictionary<NSString *, NSObject *> *cache;
+@property (strong, nonatomic) NSMutableDictionary<NSString *, id> *cache;
 
 @end
 
@@ -24,9 +24,16 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         shared = [[self alloc] init];
-        ((NovaData *) shared).cache = [[NSMutableDictionary alloc] init];
     });
     return shared;
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _cache = [[NSMutableDictionary alloc] init];
+    }
+    return self;
 }
 
 - (void)dealloc {
@@ -57,7 +64,7 @@
         }
         
         if (value == nil) {
-            value = @"(Nova: null object)";
+            value = parameters[@"default"];
         }
         
         NSString *callback = parameters[@"callback"];

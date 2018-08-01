@@ -63,21 +63,32 @@
     dispatch_async(_novaBridgeQueue, ^{
         NSTimeInterval start = [[NSDate date] timeIntervalSince1970];
         
-        NSObject *retVal = nil;
+        id retVal = nil;
         if ([param objectForKey:@"class"] == nil) {
             // send to self
             if (parameters != nil) {
-                SuppressPerformSelectorLeakWarning(retVal = [_selfController performSelector:selector withObject:parameters];);
+                SuppressPerformSelectorLeakWarning(
+                    retVal = [_selfController performSelector:selector withObject:parameters];
+                );
             } else {
-                SuppressPerformSelectorLeakWarning(retVal = [_selfController performSelector:selector];);
+                SuppressPerformSelectorLeakWarning(
+                    retVal = [_selfController performSelector:selector];
+                );
             }
         } else {
             NSString *className = [param objectForKey:@"class"];
             Class cls = NSClassFromString(className);
+            if (cls == nil) {
+                return;
+            }
             if (parameters != nil) {
-                SuppressPerformSelectorLeakWarning(retVal = [cls performSelector:selector withObject:parameters];);
+                SuppressPerformSelectorLeakWarning(
+                    retVal = [cls performSelector:selector withObject:parameters];
+                );
             } else {
-                SuppressPerformSelectorLeakWarning(retVal = [cls performSelector:selector];);
+                SuppressPerformSelectorLeakWarning(
+                    retVal = [cls performSelector:selector];
+                );
             }
         }
         
@@ -88,13 +99,22 @@
                 // of current container instance. Otherwise we should cancel
                 // the JS callback.
                 NSString *callback = [param objectForKey:@"callback"];
-                [[self class] executeCallback:callback withParameter:retVal inViewController:_selfController];
+                if (retVal == nil) {
+                    [[self class] executeCallback:callback inViewController:_selfController];
+                } else {
+                    [[self class] executeCallback:callback withParameter:retVal inViewController:_selfController];
+                }
             }
         }
     });
 }
 
-+ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param inViewController:(NovaRootViewController *)viewController {
++ (void)executeCallback:(NSString *)callback inViewController:(NovaRootViewController *)viewController {
+    NSString *js = [NSString stringWithFormat:@"%@();", callback];
+    [viewController evaluateJavaScript:js completionHandler:nil];
+}
+
++ (void)executeCallback:(NSString *)callback withParameter:(id)param inViewController:(NovaRootViewController *)viewController {
     NSString *js = @"";
     if ([param isKindOfClass:[NSString class]]) {
         NSString *paramString = [self transcodingJavaScriptMessage:(NSString *) param];
@@ -108,7 +128,24 @@
     [viewController evaluateJavaScript:js completionHandler:nil];
 }
 
-+ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param {
++ (void)executeCallback:(NSString *)callback withParameters:(NSArray<id> *)parameters inViewController:(NovaRootViewController *)viewController {
+    NSString *js = [NSString stringWithFormat:@"%@(", callback];
+    for (id param in parameters) {
+        if ([param isKindOfClass:[NSString class]]) {
+            NSString *paramString = [self transcodingJavaScriptMessage:(NSString *)param];
+            js = [js stringByAppendingString:[NSString stringWithFormat:@"'%@', ", paramString]];
+        } else {
+            NSError *error;
+            NSData *jsonData = [NSJSONSerialization dataWithJSONObject:param options:0 error:&error];
+            NSString *paramString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+            js = [js stringByAppendingString:[NSString stringWithFormat:@"%@, ", paramString]];
+        }
+    }
+    js = [[js substringToIndex:js.length - 2] stringByAppendingString:@");"];
+    [viewController evaluateJavaScript:js completionHandler:nil];
+}
+
++ (void)executeCallback:(NSString *)callback withParameter:(id)param {
     // currently we suppose that our target NovaRootViewController is the top view controller.
     UIViewController *topViewController = [NovaNavigation topViewController];
     if ([topViewController isKindOfClass:[NovaRootViewController class]] == NO) {

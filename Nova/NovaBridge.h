@@ -29,8 +29,10 @@ _Pragma("clang diagnostic pop") \
 
 + (instancetype)sharedInstance;
 
-+ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param;
-+ (void)executeCallback:(NSString *)callback withParameter:(NSObject *)param inViewController:(NovaRootViewController *)viewController;
++ (void)executeCallback:(NSString *)callback withParameter:(id)param;
++ (void)executeCallback:(NSString *)callback inViewController:(NovaRootViewController *)viewController;
++ (void)executeCallback:(NSString *)callback withParameter:(id)param inViewController:(NovaRootViewController *)viewController;
++ (void)executeCallback:(NSString *)callback withParameters:(NSArray<id> *)parameters inViewController:(NovaRootViewController *)viewController;
 + (NSString *)transcodingJavaScriptMessage:(NSString *)message;
 
 - (void)callNativeFunction:(NSDictionary *)param;

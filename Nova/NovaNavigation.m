@@ -56,7 +56,9 @@
             NSString *selStr = [NSString stringWithFormat:@"set%@:", key.capitalizedString];
             SEL setSel = NSSelectorFromString(selStr);
             if ([controllerToPush respondsToSelector:setSel]) {
-                SuppressPerformSelectorLeakWarning([controllerToPush performSelector:setSel withObject:[parameters objectForKey:key]];);
+                SuppressPerformSelectorLeakWarning(
+                    [controllerToPush performSelector:setSel withObject:[parameters objectForKey:key]];
+                );
             }
         }
         

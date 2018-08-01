@@ -33,7 +33,7 @@
                             <input type="text" class="form-control" id="load_key" value="testKey"/>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-primary" onclick="nova.data.postMessage({action: 'load', key: $('#load_key').val(), callback: 'alert'});">Load</button>
+                            <button type="button" class="btn btn-outline-primary" onclick="nova.data.postMessage({action: 'load', key: $('#load_key').val(), callback: 'alert', default: 'DefaultString'});">Load</button>
                         </div>
                     </form>
                 </div>
