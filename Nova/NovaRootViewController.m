@@ -34,38 +34,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _rootContentController = [[WKUserContentController alloc] init];
+    self.rootContentController = [[WKUserContentController alloc] init];
     
     // In case of the ViewController is initialized by storyboard instead of calling init:
     [self constructInitialJS];
     
     // Add initial JS scripts
-    for (NSString *jsScript in _initialJSScripts) {
+    for (NSString *jsScript in self.initialJSScripts) {
         WKUserScript *tmpScript = [[WKUserScript alloc] initWithSource:jsScript injectionTime:WKUserScriptInjectionTimeAtDocumentStart forMainFrameOnly:YES];
-        [_rootContentController addUserScript:tmpScript];
+        [self.rootContentController addUserScript:tmpScript];
     }
     
     // Add message handlers
-    [_rootContentController addScriptMessageHandler:[NovaNavigation sharedInstance] name:@"navigation"];
-    [_rootContentController addScriptMessageHandler:[NovaUI sharedInstance] name:@"ui"];
-    [_rootContentController addScriptMessageHandler:[NovaData sharedInstance] name:@"data"];
-    [_rootContentController addScriptMessageHandler:[NovaBridge sharedInstance] name:@"bridge"];
+    [self.rootContentController addScriptMessageHandler:[NovaNavigation sharedInstance] name:@"navigation"];
+    [self.rootContentController addScriptMessageHandler:[NovaUI sharedInstance] name:@"ui"];
+    [self.rootContentController addScriptMessageHandler:[NovaData sharedInstance] name:@"data"];
+    [self.rootContentController addScriptMessageHandler:[NovaBridge sharedInstance] name:@"bridge"];
     
-    _rootConfiguration = [[WKWebViewConfiguration alloc] init];
-    _rootConfiguration.userContentController = _rootContentController;
-    _rootConfiguration.preferences.javaScriptEnabled = YES;
-    _rootConfiguration.preferences.javaScriptCanOpenWindowsAutomatically = NO;
+    self.rootConfiguration = [[WKWebViewConfiguration alloc] init];
+    self.rootConfiguration.userContentController = _rootContentController;
+    self.rootConfiguration.preferences.javaScriptEnabled = YES;
+    self.rootConfiguration.preferences.javaScriptCanOpenWindowsAutomatically = NO;
     
-    _rootWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:_rootConfiguration];
-    _rootWebView.allowsBackForwardNavigationGestures = NO;
-    _rootWebView.scrollView.delegate = self;
-    _rootWebView.navigationDelegate = self;
-    _rootWebView.UIDelegate = self;
-    _rootWebView.backgroundColor = [UIColor whiteColor];
+    self.rootWebView = [[WKWebView alloc] initWithFrame:CGRectZero configuration:self.rootConfiguration];
+    self.rootWebView.allowsBackForwardNavigationGestures = NO;
+    self.rootWebView.scrollView.delegate = self;
+    self.rootWebView.navigationDelegate = self;
+    self.rootWebView.UIDelegate = self;
+    self.rootWebView.backgroundColor = [UIColor whiteColor];
     
     [self loadUrl:_url];
     
-    self.view = _rootWebView;
+    self.view = self.rootWebView;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -80,16 +80,16 @@
 }
 
 - (void)dealloc {
-    _rootWebView = nil;
-    _rootContentController = nil;
-    _rootConfiguration = nil;
+    self.rootWebView = nil;
+    self.rootContentController = nil;
+    self.rootConfiguration = nil;
 }
 
 - (void)constructInitialJS {
-    if (_initialJSScripts == nil) {
-        _initialJSScripts = [[NSMutableArray alloc] init];
-        [_initialJSScripts addObject:@"document.documentElement.style.webkitTouchCallout='none';document.documentElement.style.webkitUserSelect='none';"];
-        [_initialJSScripts addObject:@"const nova = window.webkit.messageHandlers;"];
+    if (self.initialJSScripts == nil) {
+        self.initialJSScripts = [[NSMutableArray alloc] init];
+        [self.initialJSScripts addObject:@"document.documentElement.style.webkitTouchCallout='none';document.documentElement.style.webkitUserSelect='none';"];
+        [self.initialJSScripts addObject:@"const nova = window.webkit.messageHandlers;"];
     }
 }
 
@@ -102,10 +102,10 @@
     if (![url hasPrefix:@"http"] && [url hasSuffix:@".html"]) {
         // Load local resources
         NSString *urlPath = [[NSBundle mainBundle] pathForResource:url ofType:@""];
-        [_rootWebView loadHTMLString:[NSString stringWithContentsOfFile:urlPath encoding:NSUTF8StringEncoding error:nil] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
+        [self.rootWebView loadHTMLString:[NSString stringWithContentsOfFile:urlPath encoding:NSUTF8StringEncoding error:nil] baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] bundlePath]]];
     } else {
         // Load web request
-        [_rootWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+        [self.rootWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     }
 }
 
@@ -113,23 +113,23 @@
 
 - (void)evaluateJavaScript:(NSString *_Nonnull)javascript completionHandler:(void (^)(id _Nullable, NSError * _Nullable))completionHandler {
     if ([[NSThread currentThread] isMainThread]) {
-        [_rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
+        [self.rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [_rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
+            [self.rootWebView evaluateJavaScript:javascript completionHandler:completionHandler];
         });
     }
 }
 
-- (void)addMessageHandler:(id)handler forMessage:(NSString *_Nonnull)message {
-    [_rootContentController addScriptMessageHandler:handler name:message];
+- (void)addMessageHandler:(id<WKScriptMessageHandler>)handler forMessage:(NSString *_Nonnull)message {
+    [self.rootContentController addScriptMessageHandler:handler name:message];
 }
 
 - (NSString *_Nullable)stringByEvaluatingJavaScript:(NSString *_Nonnull)javascript {
     __block NSString *result = nil;
     __block BOOL finished = NO;
     
-    [_rootWebView evaluateJavaScript:javascript completionHandler:^(id result, NSError *error) {
+    [self.rootWebView evaluateJavaScript:javascript completionHandler:^(id result, NSError *error) {
         if (error == nil) {
             if (result != nil) {
                 result = [NSString stringWithFormat:@"%@", result];
@@ -148,7 +148,7 @@
 }
 
 - (void)setUserAgent:(NSString *_Nonnull)userAgent {
-    _rootWebView.customUserAgent = userAgent;
+    self.rootWebView.customUserAgent = userAgent;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -160,9 +160,9 @@
 #pragma mark - WKNavigationDelegate
 
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
-    [_delegate didFinishNavigation];
+    [self.delegate didFinishNavigation];
     if (self.title == nil) {
-        self.title = _rootWebView.title;
+        self.title = self.rootWebView.title;
     }
 }
 
@@ -176,7 +176,7 @@
                 [[UIApplication sharedApplication] openURL:url];
             }
         } else {
-            if (![_delegate respondsToSelector:@selector(policyForLinkNavigation:)]) {
+            if (![self.delegate respondsToSelector:@selector(policyForLinkNavigation:)]) {
                 if (![url.description hasPrefix:@"http"] && [url.description hasSuffix:@".html"]) {
                     NovaRootViewController *rootVC = [[NovaRootViewController alloc] init];
                     rootVC.url = url.description;
@@ -191,7 +191,7 @@
                 }
                 
             } else {
-                [_delegate policyForLinkNavigation:url];
+                [self.delegate policyForLinkNavigation:url];
             }
         }
         decisionHandler(WKNavigationActionPolicyCancel);
@@ -209,7 +209,7 @@
 }
 
 - (void)webView:(WKWebView *)webView runJavaScriptAlertPanelWithMessage:(NSString *)message initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(void))completionHandler {
-    NSString *title = _alertTitle == nil ?  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] : _alertTitle;
+    NSString *title = self.alertTitle == nil ?  [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"] : self.alertTitle;
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
     [alert addAction:cancel];

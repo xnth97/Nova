@@ -43,7 +43,7 @@
 }
 
 - (void)dealloc {
-    _selfController = nil;
+    self.selfController = nil;
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
@@ -57,28 +57,34 @@
 
 - (void)callNativeFunction:(NSDictionary *)param {
     NSString *funcName = [param objectForKey:@"func"];
-    NSObject *parameters = [param objectForKey:@"param"];
+    id parameters = [param objectForKey:@"param"];
     SEL selector = NSSelectorFromString(funcName);
     
-    dispatch_async(_novaBridgeQueue, ^{
+    dispatch_async(self.novaBridgeQueue, ^{
         NSTimeInterval start = [[NSDate date] timeIntervalSince1970];
         
         id retVal = nil;
         if ([param objectForKey:@"class"] == nil) {
             // send to self
+            if (![self.selfController respondsToSelector:selector]) {
+                return;
+            }
             if (parameters != nil) {
                 SuppressPerformSelectorLeakWarning(
-                    retVal = [_selfController performSelector:selector withObject:parameters];
+                    retVal = [self.selfController performSelector:selector withObject:parameters];
                 );
             } else {
                 SuppressPerformSelectorLeakWarning(
-                    retVal = [_selfController performSelector:selector];
+                    retVal = [self.selfController performSelector:selector];
                 );
             }
         } else {
             NSString *className = [param objectForKey:@"class"];
             Class cls = NSClassFromString(className);
             if (cls == nil) {
+                return;
+            }
+            if (![cls respondsToSelector:selector]) {
                 return;
             }
             if (parameters != nil) {
@@ -93,16 +99,16 @@
         }
         
         if ([param objectForKey:@"callback"] != nil) {
-            if (start >= _setControllerTime) {
+            if (start >= self.setControllerTime) {
                 // Since all containers share this one handler, we should
                 // check whether this JS code is executed after the initialization
                 // of current container instance. Otherwise we should cancel
                 // the JS callback.
                 NSString *callback = [param objectForKey:@"callback"];
                 if (retVal == nil) {
-                    [[self class] executeCallback:callback inViewController:_selfController];
+                    [[self class] executeCallback:callback inViewController:self.selfController];
                 } else {
-                    [[self class] executeCallback:callback withParameter:retVal inViewController:_selfController];
+                    [[self class] executeCallback:callback withParameter:retVal inViewController:self.selfController];
                 }
             }
         }

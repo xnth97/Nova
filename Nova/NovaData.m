@@ -37,7 +37,7 @@ static NSString * const NOVA_KV_STORAGE_KEY = @"NOVA_KV_STORAGE";
 }
 
 - (void)dealloc {
-    _selfController = nil;
+    self.selfController = nil;
 }
 
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message {
@@ -51,7 +51,9 @@ static NSString * const NOVA_KV_STORAGE_KEY = @"NOVA_KV_STORAGE";
     NSString *key = parameters[@"key"];
     if ([action isEqualToString:@"save"]) {
         NSObject *value = parameters[@"value"];
-        [self.cache setObject:value forKey:key];
+        @synchronized (self) {
+            [self.cache setObject:value forKey:key];
+        }
         [[NSUserDefaults standardUserDefaults] setObject:self.cache forKey:NOVA_KV_STORAGE_KEY];
     } else if ([action isEqualToString:@"load"]) {
         NSObject *value = nil;
