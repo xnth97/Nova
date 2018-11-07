@@ -69,14 +69,14 @@
             if (![self.selfController respondsToSelector:selector]) {
                 return;
             }
+            
+            IMP imp = [self.selfController methodForSelector:selector];
             if (parameters != nil) {
-                SuppressPerformSelectorLeakWarning(
-                    retVal = [self.selfController performSelector:selector withObject:parameters];
-                );
+                id (*func)(id, SEL, id) = (void *)imp;
+                retVal = func(self.selfController, selector, parameters);
             } else {
-                SuppressPerformSelectorLeakWarning(
-                    retVal = [self.selfController performSelector:selector];
-                );
+                id (*func)(id, SEL) = (void *)imp;
+                retVal = func(self.selfController, selector);
             }
         } else {
             NSString *className = [param objectForKey:@"class"];
@@ -87,14 +87,14 @@
             if (![cls respondsToSelector:selector]) {
                 return;
             }
+            
+            IMP imp = [cls methodForSelector:selector];
             if (parameters != nil) {
-                SuppressPerformSelectorLeakWarning(
-                    retVal = [cls performSelector:selector withObject:parameters];
-                );
+                id (*func)(id, SEL, id) = (void *)imp;
+                retVal = func(cls, selector, parameters);
             } else {
-                SuppressPerformSelectorLeakWarning(
-                    retVal = [cls performSelector:selector];
-                );
+                id (*func)(id, SEL) = (void *)imp;
+                retVal = func(cls, selector);
             }
         }
         

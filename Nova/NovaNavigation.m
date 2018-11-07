@@ -8,7 +8,6 @@
 
 #import "NovaNavigation.h"
 #import "NovaRootViewController.h"
-#import "NovaBridge.h"
 #import <objc/runtime.h>
 
 @implementation NovaNavigation
@@ -56,9 +55,9 @@
             NSString *selStr = [NSString stringWithFormat:@"set%@:", key.capitalizedString];
             SEL setSel = NSSelectorFromString(selStr);
             if ([controllerToPush respondsToSelector:setSel]) {
-                SuppressPerformSelectorLeakWarning(
-                    [controllerToPush performSelector:setSel withObject:[parameters objectForKey:key]];
-                );
+                IMP setImp = [controllerToPush methodForSelector:setSel];
+                void (*func)(id, SEL, id) = (void *)setImp;
+                func(controllerToPush, setSel, [parameters objectForKey:key]);
             }
         }
         

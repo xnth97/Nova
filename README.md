@@ -231,7 +231,7 @@ nova.data.postMessage({ action: 'save', key: 'key_name', value: 'value_you_want_
 Load value from key 'key_name', then pass the loaded value to the function in callback field.
 
 ```javascript
-nova.data.postMessage({ action: 'save', key: 'key_name', callback: 'alert' });
+nova.data.postMessage({ action: 'load', key: 'key_name', callback: 'alert' });
 ```
 
 #### Remove

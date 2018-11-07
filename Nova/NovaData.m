@@ -14,6 +14,7 @@ static NSString * const NOVA_KV_STORAGE_KEY = @"NOVA_KV_STORAGE";
 @interface NovaData ()
 
 @property (strong, nonatomic) NSMutableDictionary<NSString *, id> *cache;
+@property (strong, nonatomic) dispatch_queue_t novaDataQueue;
 
 @end
 
@@ -32,6 +33,7 @@ static NSString * const NOVA_KV_STORAGE_KEY = @"NOVA_KV_STORAGE";
     self = [super init];
     if (self) {
         _cache = [[NSMutableDictionary alloc] init];
+        _novaDataQueue = dispatch_queue_create("nova_data_queue", DISPATCH_QUEUE_SERIAL);
     }
     return self;
 }
@@ -51,19 +53,21 @@ static NSString * const NOVA_KV_STORAGE_KEY = @"NOVA_KV_STORAGE";
     NSString *key = parameters[@"key"];
     if ([action isEqualToString:@"save"]) {
         NSObject *value = parameters[@"value"];
-        @synchronized (self) {
+        dispatch_async(self.novaDataQueue, ^{
             [self.cache setObject:value forKey:key];
-        }
+        });
         [[NSUserDefaults standardUserDefaults] setObject:self.cache forKey:NOVA_KV_STORAGE_KEY];
     } else if ([action isEqualToString:@"load"]) {
-        NSObject *value = nil;
+        __block id value = nil;
         
-        if ([self.cache.allKeys containsObject:key]) {
-            value = self.cache[key];
-        } else {
-            self.cache = [[[NSUserDefaults standardUserDefaults] objectForKey:NOVA_KV_STORAGE_KEY] mutableCopy];
-            value = self.cache[key];
-        }
+        dispatch_sync(self.novaDataQueue, ^{
+            if ([self.cache.allKeys containsObject:key]) {
+                value = self.cache[key];
+            } else {
+                self.cache = [[[NSUserDefaults standardUserDefaults] objectForKey:NOVA_KV_STORAGE_KEY] mutableCopy];
+                value = self.cache[key];
+            }
+        });
         
         if (value == nil) {
             value = parameters[@"default"];
@@ -73,7 +77,9 @@ static NSString * const NOVA_KV_STORAGE_KEY = @"NOVA_KV_STORAGE";
         [NovaBridge executeCallback:callback withParameter:value inViewController:_selfController];
         
     } else if ([action isEqualToString:@"remove"]) {
-        [self.cache removeObjectForKey:key];
+        dispatch_async(self.novaDataQueue, ^{
+            [self.cache removeObjectForKey:key];
+        });
         [[NSUserDefaults standardUserDefaults] setObject:self.cache forKey:NOVA_KV_STORAGE_KEY];
     }
 }
