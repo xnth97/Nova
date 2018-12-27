@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CB4B97DF21D470E30034CF95 /* NovaPersistentMap.m in Sources */ = {isa = PBXBuildFile; fileRef = CB4B97DE21D470E30034CF95 /* NovaPersistentMap.m */; };
 		E9689D242022360200045D69 /* NovaNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = E9689D232022360200045D69 /* NovaNavigation.m */; };
 		E97CA98B2021902A00A178A7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E97CA98A2021902A00A178A7 /* AppDelegate.m */; };
 		E97CA9912021902A00A178A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E97CA98F2021902A00A178A7 /* Main.storyboard */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CB4B97DD21D470E30034CF95 /* NovaPersistentMap.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaPersistentMap.h; sourceTree = "<group>"; };
+		CB4B97DE21D470E30034CF95 /* NovaPersistentMap.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaPersistentMap.m; sourceTree = "<group>"; };
 		E9689D222022360200045D69 /* NovaNavigation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NovaNavigation.h; sourceTree = "<group>"; };
 		E9689D232022360200045D69 /* NovaNavigation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NovaNavigation.m; sourceTree = "<group>"; };
 		E97CA9862021902A00A178A7 /* Nova.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nova.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +130,8 @@
 				E990253E2022EF1200937F89 /* NovaUI.m */,
 				E9A941572026AC930085BF1F /* NovaBlockHolder.h */,
 				E9A941582026AC930085BF1F /* NovaBlockHolder.m */,
+				CB4B97DD21D470E30034CF95 /* NovaPersistentMap.h */,
+				CB4B97DE21D470E30034CF95 /* NovaPersistentMap.m */,
 			);
 			path = Nova;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB4B97DF21D470E30034CF95 /* NovaPersistentMap.m in Sources */,
 				E990253F2022EF1200937F89 /* NovaUI.m in Sources */,
 				E9A941592026AC930085BF1F /* NovaBlockHolder.m in Sources */,
 				E97CA9992021902A00A178A7 /* main.m in Sources */,
