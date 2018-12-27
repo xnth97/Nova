@@ -250,6 +250,7 @@ nova.data.postMessage({ action: 'remove', key: 'key_name' });
 - [x] Runtime method invocation
 - [ ] Swift compatibility
 - [x] UA
+- [x] Use mmap for data persistence
 
 # License
 
