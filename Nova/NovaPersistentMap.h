@@ -2,6 +2,9 @@
 //  NovaPersistentMap.h
 //  Nova
 //
+//  A utility class that works as NSDictionary but implements data persistence
+//  using mmap and NSKeyedArchiver/Unarchiver.
+//
 //  Created by Yubo Qin on 12/26/18.
 //  Copyright © 2018 Yubo Qin. All rights reserved.
 //
