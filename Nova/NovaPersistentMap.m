@@ -122,11 +122,11 @@ static int pageSize;
         return NO;
     }
     
-    NSData *lengthBuffer = [NSData dataWithBytesNoCopy:m_ptr length:sizeof(uint64_t) freeWhenDone:NO];
-    uint64_t actualLength = 0;
-    [lengthBuffer getBytes:&actualLength length:sizeof(uint64_t)];
+    NSData *lengthBuffer = [NSData dataWithBytesNoCopy:m_ptr length:sizeof(uint32_t) freeWhenDone:NO];
+    uint32_t actualLength = 0;
+    [lengthBuffer getBytes:&actualLength length:sizeof(uint32_t)];
     m_dataSize = actualLength;
-    NSData *inputBuffer = [NSData dataWithBytesNoCopy:m_ptr + sizeof(uint64_t) length:actualLength freeWhenDone:NO];
+    NSData *inputBuffer = [NSData dataWithBytesNoCopy:m_ptr + sizeof(uint32_t) length:actualLength freeWhenDone:NO];
     
     m_dict = [self decodeDictionaryWithData:inputBuffer];
     
@@ -139,24 +139,60 @@ static int pageSize;
     return YES;
 }
 
-- (BOOL)expandMmapSizeWithRequiredSize:(uint64_t)size {
-    uint64_t requiredSize = size;
-    if (size < pageSize || (size % pageSize != 0)) {
-        requiredSize = ((size / pageSize) + 1) * pageSize;
+- (BOOL)expandMmapSizeWithRequiredSize:(uint32_t)size {
+    uint32_t requiredSize = [self roundSizeToPageSize:size];
+    
+    uint32_t expandToSize = (uint32_t)m_size;
+    do {
+        expandToSize *= 2;
+    } while (requiredSize >= expandToSize);
+    
+    if (expandToSize == m_size) {
+        return YES;
     }
-    uint64_t expandToSize = fmax(requiredSize, m_size * 2);
-    munmap(m_ptr, m_size);
     
     if (ftruncate(m_fd, expandToSize) != 0) {
         return NO;
     }
-    m_size = expandToSize;
     
-    m_ptr = (char *)mmap(NULL, m_size, PROT_READ | PROT_WRITE, MAP_SHARED, m_fd, 0);
+    if (munmap(m_ptr, m_size) != 0) {
+        return NO;
+    }
+    
+    m_ptr = (char *)mmap(NULL, expandToSize, PROT_READ | PROT_WRITE, MAP_SHARED, m_fd, 0);
     if (m_ptr == MAP_FAILED || m_ptr == NULL) {
         return NO;
     }
     
+    m_size = expandToSize;
+    return YES;
+}
+
+- (BOOL)trimMmapSizeWithRequiredSize:(uint32_t)size {
+    uint32_t requiredSize = [self roundSizeToPageSize:size];
+    
+    uint32_t trimToSize = (uint32_t)m_size;
+    while (trimToSize > (requiredSize * 2)) {
+        trimToSize /= 2;
+    }
+    if (m_size == trimToSize) {
+        return YES;
+    }
+    
+    if (ftruncate(m_fd, trimToSize) != 0) {
+        return NO;
+    }
+    
+    if (munmap(m_ptr, m_size) != 0) {
+        return NO;
+    }
+    
+    m_ptr = (char *)mmap(m_ptr, trimToSize, PROT_READ | PROT_WRITE, MAP_SHARED, m_fd, 0);
+    if (m_ptr == MAP_FAILED || m_ptr == NULL) {
+        return NO;
+    }
+    
+    m_size = trimToSize;
     return YES;
 }
 
@@ -165,15 +201,15 @@ static int pageSize;
     NSData *kvData = [NSKeyedArchiver archivedDataWithRootObject:kvArray];
     uint32_t kvLength = (uint32_t)kvData.length;
     
-    uint64_t requiredSize = m_dataSize + kvLength + sizeof(uint32_t);
+    uint32_t requiredSize = (uint32_t)m_dataSize + kvLength + sizeof(uint32_t);
     if (requiredSize >= m_size) {
         if (![self expandMmapSizeWithRequiredSize:requiredSize]) {
             return;
         }
     }
-    memcpy(m_ptr + sizeof(uint64_t) + m_dataSize, &kvLength, sizeof(uint32_t));
-    memcpy(m_ptr + sizeof(uint64_t) + m_dataSize + sizeof(uint32_t), kvData.bytes, kvData.length);
-    memcpy(m_ptr, &requiredSize, sizeof(uint64_t));
+    memcpy(m_ptr + sizeof(uint32_t) + m_dataSize, &kvLength, sizeof(uint32_t));
+    memcpy(m_ptr + sizeof(uint32_t) + m_dataSize + sizeof(uint32_t), kvData.bytes, kvData.length);
+    memcpy(m_ptr, &requiredSize, sizeof(uint32_t));
     m_dataSize = requiredSize;
 }
 
@@ -218,15 +254,27 @@ static int pageSize;
         [data appendData:kvData];
     }
     
-    uint64_t dataLength = (uint64_t)data.length;
-    if (dataLength + sizeof(uint64_t) >= m_size) {
-        if (![self expandMmapSizeWithRequiredSize:dataLength + sizeof(uint64_t)]) {
+    uint32_t dataLength = (uint32_t)data.length;
+    if (dataLength + sizeof(uint32_t) >= m_size) {
+        if (![self expandMmapSizeWithRequiredSize:dataLength + sizeof(uint32_t)]) {
+            return;
+        }
+    } else {
+        if (![self trimMmapSizeWithRequiredSize:dataLength + sizeof(uint32_t)]) {
             return;
         }
     }
-    memcpy(m_ptr, &dataLength, sizeof(uint64_t));
-    memcpy(m_ptr + sizeof(uint64_t), data.bytes, dataLength);
+    memcpy(m_ptr, &dataLength, sizeof(uint32_t));
+    memcpy(m_ptr + sizeof(uint32_t), data.bytes, dataLength);
     m_dataSize = dataLength;
+}
+
+- (uint32_t)roundSizeToPageSize:(uint32_t)size {
+    uint32_t requiredSize = size;
+    if (size < pageSize || (size % pageSize != 0)) {
+        requiredSize = ((size / pageSize) + 1) * pageSize;
+    }
+    return requiredSize;
 }
 
 #pragma mark - Public APIs
