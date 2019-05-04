@@ -37,14 +37,12 @@
         <script src="bootstrap.min.js"></script>
         <script src="jquery.min.js"></script>
         <script>
-            Nova.callNative('getSystemInfo:', 'Just an additional string', 'updateUI');
-
-            function updateUI(val) {
+            Nova.callNative('getSystemInfo:', 'Just an additional string').then(val => {
                 $('#os_version').html(val['os']);
                 $('#cpu_count').html(val['cpu']);
                 $('#physical_mem').html(val['mem']);
                 $('#additional').html(val['additional']);
-            }
+            });
         </script>
     </body>
 </html>

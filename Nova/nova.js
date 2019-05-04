@@ -1,5 +1,4 @@
 class Nova {
-
   // Navigation
 
   static show(options) {
@@ -31,18 +30,15 @@ class Nova {
 
   // Bridge
 
-  static callNative(func, param, callback, cls) {
+  static callNative(func, param, cls) {
     let msg = {func: func};
-    if (param !== undefined && param !== null) {
+    if (param) {
       msg.param = param;
     }
-    if (callback !== undefined && callback !== null) {
-      msg.callback = callback;
-    }
-    if (cls !== undefined && undefined !== null) {
+    if (cls) {
       msg.class = cls;
     }
-    window.webkit.messageHandlers.bridge.postMessage(msg);
+    return new NovaBridge().postMessage('bridge', msg);
   }
 
   // UI
@@ -116,13 +112,13 @@ class Nova {
     });
   }
 
-  static load(key, defaultValue, callback) {
-    window.webkit.messageHandlers.data.postMessage({
+  static load(key, defaultValue) {
+    let msg = {
       action: 'load',
       key: key,
       default: defaultValue,
-      callback: callback,
-    });
+    };
+    return new NovaBridge().postMessage('data', msg);
   }
 
   static remove(key) {
@@ -130,5 +126,38 @@ class Nova {
       action: 'remove',
       key: key,
     });
+  }
+}
+
+let _novaBridgeInstance = null;
+
+class NovaBridge {
+  constructor() {
+    if (_novaBridgeInstance) {
+      return _novaBridgeInstance;
+    }
+
+    this.handlers = {};
+    this.currentId = 0;
+    _novaBridgeInstance = this;
+  }
+
+  postMessage(webkitHandler, message) {
+    return new Promise((resolve, reject) => {
+      let msg = {id: `${this.currentId}`};
+      this.handlers[`${this.currentId}`] = {resolve, reject};
+      this.currentId ++;
+      msg = Object.assign(msg, message);
+      window.webkit.messageHandlers[webkitHandler].postMessage(msg);
+    });
+  }
+
+  handleMessage(id, error, data) {
+    if (error) {
+      this.handlers[id].reject(error);
+    } else {
+      this.handlers[id].resolve(data);
+    }
+    delete this.handlers[id];
   }
 }
