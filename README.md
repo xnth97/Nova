@@ -59,18 +59,22 @@ Nova allows you to directly execute Objective-C native methods and use the retur
 ### Basic Usage
 
 ```javascript
-Nova.callNative('getSystemInfo', null, 'updateUI');
+Nova.callNative('getSystemInfo', null).then(val => {
+    // process return value in JavaScript
+});
 ```
 
-This would execute the `getSystemInfo:` method in current `NovaRootViewController` instance, and pass its return value to `updateUI()` function in JavaScript. Note that you may want to use your own subclass of `NovaRootViewController` while invoking native functions.
+This would execute the `getSystemInfo:` method in current `NovaRootViewController` instance and returns a promise with native method's return value. Note that you may want to use your own subclass of `NovaRootViewController` while invoking native functions.
 
 ### Class and Parameters
 
 ```javascript
-Nova.callNative('getSystemInfo:', 'aParameter', 'updateUI', 'TestClass');
+Nova.callNative('getSystemInfo:', 'aParameter', 'TestClass').then(val => {
+    // process return value in JavaScript
+});
 ```
 
-This would execute the class method `[TestClass getSystemInfo:aParameter]`, and pass its return value to `updateUI()` function in JavaScript. Note that currently only ONE parameter is supported. Please design your method properly.
+This would execute the class method `[TestClass getSystemInfo:aParameter]`, and returns a promise with native method's return value. Note that currently only ONE parameter is supported. Please design your method properly.
 
 When using parameters, please make sure the first parameter is the string representation of a `SEL` selector. The ':' symbol is required. Other arguments are optional.
 
@@ -211,10 +215,12 @@ Nova.save('key_name', 'value_you_want_to_save');
 
 #### Load
 
-Load value from key 'key_name' with default value 'default_value', then pass the loaded value to the function in callback field.
+Load value from key 'key_name' with default value 'default_value', and return a promise with the loaded value.
 
 ```javascript
-Nova.load('key_name', 'default_value', 'alert');
+Nova.load('key_name', 'default_value').then(val => {
+    alert(val);
+});
 ```
 
 #### Remove
@@ -228,6 +234,7 @@ Nova.remove('key_name');
 # TODO List
 
 - [x] Better JavaScript APIs
+- [x] Use Promise to refactor native bridge
 - [ ] Provide more native UIKit APIs
 - [ ] JSCore to process JSValue and ObjC objects
 - [ ] Safe area

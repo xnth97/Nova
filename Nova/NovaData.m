@@ -46,6 +46,7 @@
     
     NSDictionary *parameters = message.body;
     
+    NSString *msgId = parameters[@"id"];
     NSString *action = parameters[@"action"];
     NSString *key = parameters[@"key"];
     if ([action isEqualToString:@"save"]) {
@@ -58,9 +59,7 @@
             value = parameters[@"default"];
         }
         
-        NSString *callback = parameters[@"callback"];
-        [NovaBridge executeCallback:callback withParameter:value inViewController:_selfController];
-        
+        [NovaBridge handleMessageWithId:msgId error:[NSNull null] data:value inViewController:_selfController];
     } else if ([action isEqualToString:@"remove"]) {
         [self.persistentMap removeObjectForKey:key];
     }

@@ -22,9 +22,12 @@
 + (instancetype)sharedInstance;
 
 + (void)executeCallback:(NSString *)callback withParameter:(id)param;
++ (void)executeCallback:(NSString *)callback withParameters:(NSArray<id> *)params;
 + (void)executeCallback:(NSString *)callback inViewController:(NovaRootViewController *)viewController;
 + (void)executeCallback:(NSString *)callback withParameter:(id)param inViewController:(NovaRootViewController *)viewController;
 + (void)executeCallback:(NSString *)callback withParameters:(NSArray<id> *)parameters inViewController:(NovaRootViewController *)viewController;
++ (void)handleMessageWithId:(NSString *)msgId error:(id)error data:(id)data;
++ (void)handleMessageWithId:(NSString *)msgId error:(id)error data:(id)data inViewController:(NovaRootViewController *)viewController;
 + (NSString *)transcodingJavaScriptMessage:(NSString *)message;
 
 - (void)callNativeFunction:(NSDictionary *)param;

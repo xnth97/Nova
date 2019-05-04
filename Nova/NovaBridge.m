@@ -56,6 +56,7 @@
 }
 
 - (void)callNativeFunction:(NSDictionary *)param {
+    NSString *msgId = param[@"id"];
     NSString *funcName = [param objectForKey:@"func"];
     id parameters = [param objectForKey:@"param"];
     SEL selector = NSSelectorFromString(funcName);
@@ -98,18 +99,15 @@
             }
         }
         
-        if ([param objectForKey:@"callback"] != nil) {
-            if (start >= self.setControllerTime) {
-                // Since all containers share this one handler, we should
-                // check whether this JS code is executed after the initialization
-                // of current container instance. Otherwise we should cancel
-                // the JS callback.
-                NSString *callback = [param objectForKey:@"callback"];
-                if (retVal == nil) {
-                    [[self class] executeCallback:callback inViewController:self.selfController];
-                } else {
-                    [[self class] executeCallback:callback withParameter:retVal inViewController:self.selfController];
-                }
+        if (start >= self.setControllerTime) {
+            // Since all containers share this one handler, we should
+            // check whether this JS code is executed after the initialization
+            // of current container instance. Otherwise we should cancel
+            // the JS callback.
+            if (retVal == nil) {
+                [[self class] handleMessageWithId:msgId error:[NSNull null] data:[NSNull null] inViewController:self.selfController];
+            } else {
+                [[self class] handleMessageWithId:msgId error:[NSNull null] data:retVal inViewController:self.selfController];
             }
         }
     });
@@ -122,7 +120,9 @@
 
 + (void)executeCallback:(NSString *)callback withParameter:(id)param inViewController:(NovaRootViewController *)viewController {
     NSString *js = @"";
-    if ([param isKindOfClass:[NSString class]]) {
+    if (param == [NSNull null]) {
+        js = [NSString stringWithFormat:@"%@(null);", callback];
+    } else if ([param isKindOfClass:[NSString class]]) {
         NSString *paramString = [self transcodingJavaScriptMessage:(NSString *) param];
         js = [NSString stringWithFormat:@"%@('%@');", callback, paramString];
     } else {
@@ -137,7 +137,9 @@
 + (void)executeCallback:(NSString *)callback withParameters:(NSArray<id> *)parameters inViewController:(NovaRootViewController *)viewController {
     NSString *js = [NSString stringWithFormat:@"%@(", callback];
     for (id param in parameters) {
-        if ([param isKindOfClass:[NSString class]]) {
+        if (param == [NSNull null]) {
+            js = [js stringByAppendingString:@"null, "];
+        } else if ([param isKindOfClass:[NSString class]]) {
             NSString *paramString = [self transcodingJavaScriptMessage:(NSString *)param];
             js = [js stringByAppendingString:[NSString stringWithFormat:@"'%@', ", paramString]];
         } else {
@@ -153,12 +155,20 @@
 
 + (void)executeCallback:(NSString *)callback withParameter:(id)param {
     // currently we suppose that our target NovaRootViewController is the top view controller.
-    UIViewController *topViewController = [NovaNavigation topViewController];
-    if ([topViewController isKindOfClass:[NovaRootViewController class]] == NO) {
-        return;
-    }
-    NovaRootViewController *top = (NovaRootViewController *)topViewController;
-    [[self class] executeCallback:callback withParameter:param inViewController:top];
+    [[self class] executeCallback:callback withParameter:param inViewController:[[self class] getTopNovaVC]];
+}
+
++ (void)executeCallback:(NSString *)callback withParameters:(NSArray<id> *)params {
+    // currently we suppose that our target NovaRootViewController is the top view controller.
+    [[self class] executeCallback:callback withParameters:params inViewController:[[self class] getTopNovaVC]];
+}
+
++ (void)handleMessageWithId:(NSString *)msgId error:(id)error data:(id)data {
+    [[self class] handleMessageWithId:msgId error:error data:data inViewController:[[self class] getTopNovaVC]];
+}
+
++ (void)handleMessageWithId:(NSString *)msgId error:(id)error data:(id)data inViewController:(NovaRootViewController *)viewController {
+    [[self class] executeCallback:@"new NovaBridge().handleMessage" withParameters:@[msgId, error, data] inViewController:viewController];
 }
 
 + (NSString *)transcodingJavaScriptMessage:(NSString *)message {
@@ -172,6 +182,15 @@
     message = [message stringByReplacingOccurrencesOfString:@"\u2029" withString:@"\\u2029"];
     
     return message;
+}
+
++ (NovaRootViewController *)getTopNovaVC {
+    UIViewController *topViewController = [NovaNavigation topViewController];
+    if ([topViewController isKindOfClass:[NovaRootViewController class]] == NO) {
+        return nil;
+    }
+    NovaRootViewController *top = (NovaRootViewController *)topViewController;
+    return top;
 }
 
 @end

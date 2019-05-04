@@ -45,7 +45,7 @@
 
         <script>
             function loadData() {
-                Nova.load($('#load_key').val(), 'DefaultString', 'alert');
+                Nova.load($('#load_key').val(), 'DefaultString').then(val => alert(val));
             }
 
             function saveData(data) {
