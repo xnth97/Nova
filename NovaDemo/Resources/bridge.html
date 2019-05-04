@@ -37,21 +37,7 @@
         <script src="bootstrap.min.js"></script>
         <script src="jquery.min.js"></script>
         <script>
-            nova.bridge.postMessage({
-                func: 'getSystemInfo:',
-                callback: 'updateUI',
-                param: 'Just an additional string',
-            });
-            nova.ui.postMessage({
-                rightBarButton: {
-                    style: 'add', 
-                    bridge: {
-                        func: 'getSystemInfo:',
-                        callback: 'updateUI',
-                        param: 'Another additional string, which is added by this UIBarButtonItem'
-                    }
-                },
-            });
+            Nova.callNative('getSystemInfo:', 'Just an additional string', 'updateUI');
 
             function updateUI(val) {
                 $('#os_version').html(val['os']);

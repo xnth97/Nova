@@ -17,7 +17,7 @@
 @implementation NovaBlockHolder
 
 + (id)blockHolderWithBlock:(dispatch_block_t)block {
-    NovaBlockHolder *instance = [[self alloc] initWithBlock:block];
+    NovaBlockHolder *instance = [[NovaBlockHolder alloc] initWithBlock:block];
     return instance;
 }
 
