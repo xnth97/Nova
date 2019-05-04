@@ -59,7 +59,7 @@ Nova allows you to directly execute Objective-C native methods and use the retur
 ### Basic Usage
 
 ```javascript
-Nova.callNative('getSystemInfo', null).then(val => {
+Nova.callNative('getSystemInfo').then(val => {
     // process return value in JavaScript
 });
 ```
