@@ -168,6 +168,10 @@
 }
 
 + (void)handleMessageWithId:(NSString *)msgId error:(id)error data:(id)data inViewController:(NovaRootViewController *)viewController {
+    if (msgId == nil || ![msgId isKindOfClass:[NSString class]]) {
+        // can't handle message without a valid message id
+        return;
+    }
     [[self class] executeCallback:@"new NovaBridge().handleMessage" withParameters:@[msgId, error, data] inViewController:viewController];
 }
 
