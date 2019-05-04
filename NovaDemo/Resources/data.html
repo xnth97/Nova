@@ -33,7 +33,7 @@
                             <input type="text" class="form-control" id="load_key" value="testKey"/>
                         </div>
                         <div class="form-group">
-                            <button type="button" class="btn btn-outline-primary" onclick="nova.data.postMessage({action: 'load', key: $('#load_key').val(), callback: 'alert', default: 'DefaultString'});">Load</button>
+                            <button type="button" class="btn btn-outline-primary" onclick="loadData()">Load</button>
                         </div>
                     </form>
                 </div>
@@ -44,8 +44,12 @@
         <script src="jquery.min.js"></script>
 
         <script>
+            function loadData() {
+                Nova.load($('#load_key').val(), 'DefaultString', 'alert');
+            }
+
             function saveData(data) {
-                nova.data.postMessage({action: 'save', key: $('#input_key').val(), value: $('#input_text').val()});
+                Nova.save($('#input_key').val(), $('#input_text').val());
                 alert('Successfully saved ' + $('#input_text').val() + ' for key ' + $('#input_key').val());
                 $('#input_text').val('');
             }

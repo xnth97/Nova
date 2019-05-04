@@ -8,12 +8,12 @@
     </head>
     <body>
         <div class="list-group">
-            <a class="list-group-item list-group-item-action" href="javascript:nova.navigation.postMessage({type: 'show', url: 'navigation.html', title: 'Navigation'})" >Push</a>
-            <a class="list-group-item list-group-item-action" href="javascript:nova.navigation.postMessage({type: 'show', class: 'DemoViewController'})" >Push with Custom Class</a>
-            <a class="list-group-item list-group-item-action" href="javascript:nova.navigation.postMessage({type: 'pop'})" >Pop</a>
-            <a class="list-group-item list-group-item-action" href="javascript:nova.navigation.postMessage({type: 'present', url: 'navigation.html', title: 'Navigation'})" >Present</a>
-            <a class="list-group-item list-group-item-action" href="javascript:nova.navigation.postMessage({type: 'present', url: 'navigation.html', title: 'Navigation', nav: 'true', initJS: 'nova.ui.postMessage({ rightBarButton: { style: \'done\', callback: \'nova.navigation.postMessage({ type: &quot;dismiss&quot; })\' } });'})" >Present With Navigation Controller</a>
-            <a class="list-group-item list-group-item-action" href="javascript:nova.navigation.postMessage({type: 'dismiss', url: 'navigation.html', title: 'Navigation'})" >Dismiss</a>
+            <a class="list-group-item list-group-item-action" href="javascript:Nova.show({url: 'navigation.html', title: 'Navigation'})" >Push</a>
+            <a class="list-group-item list-group-item-action" href="javascript:Nova.show({class: 'DemoViewController'})" >Push with Custom Class</a>
+            <a class="list-group-item list-group-item-action" href="javascript:Nova.pop()" >Pop</a>
+            <a class="list-group-item list-group-item-action" href="javascript:Nova.present({url: 'navigation.html', title: 'Navigation'})" >Present</a>
+            <a class="list-group-item list-group-item-action" href="javascript:Nova.present({url: 'navigation.html', title: 'Navigation', initJS: 'Nova.setRightBarButton({ style: \'done\', callback: \'Nova.dismiss()\' });'}, true)" >Present With Navigation Controller</a>
+            <a class="list-group-item list-group-item-action" href="javascript:Nova.dismiss()" >Dismiss</a>
         </div>
         
         <script src="bootstrap.min.js"></script>

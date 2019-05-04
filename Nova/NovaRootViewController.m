@@ -89,7 +89,7 @@
     if (self.initialJSScripts == nil) {
         self.initialJSScripts = [[NSMutableArray alloc] init];
         [self.initialJSScripts addObject:@"document.documentElement.style.webkitTouchCallout='none';document.documentElement.style.webkitUserSelect='none';"];
-        [self.initialJSScripts addObject:@"const nova = window.webkit.messageHandlers;"];
+        [self.initialJSScripts addObject:[NSString stringWithContentsOfURL:[NSBundle.mainBundle URLForResource:@"nova" withExtension:@"js"] encoding:NSUTF8StringEncoding error:nil]];
     }
 }
 
