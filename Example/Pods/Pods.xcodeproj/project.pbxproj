@@ -1,0 +1,715 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		02F6CC1D4AAC2BDAE9FD614A5B8869FF /* NovaNavigation.m in Sources */ = {isa = PBXBuildFile; fileRef = 458A4A857857AAB270E56EE2937B01B3 /* NovaNavigation.m */; };
+		0E806A2A36D9CEBDD991FE3C476A4B97 /* NovaRootViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D9CC57349FEDBE4B935D3B43BB8C46B3 /* NovaRootViewController.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2BDEBFC396199F628421462C139C4C8F /* NovaUI.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B0CDB9137ED3BB83EBB0956942FA389 /* NovaUI.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		37C45C8679FF701C66DABD09C5DA8569 /* NovaBlockHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = 124A6342E49084DAA74371FC3062FD0A /* NovaBlockHolder.m */; };
+		5CD15675198FAF783A24D821E106A147 /* NovaNavigation.h in Headers */ = {isa = PBXBuildFile; fileRef = 618035C46DAE2A0C0E22BAEB87E358CC /* NovaNavigation.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		68C02DC1ABD8F367BE0C8DD44909F720 /* NovaBridge.h in Headers */ = {isa = PBXBuildFile; fileRef = 020AC2EA737DAD1B3FEF47D475CDA30B /* NovaBridge.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		69B48EC130A7061C4EF6CA14935EB851 /* NovaBlockHolder.h in Headers */ = {isa = PBXBuildFile; fileRef = 82E27E6A2C383C5420EBA173394D670E /* NovaBlockHolder.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6D2FCBEE6A5F12F8AF873B6D48881DB7 /* NovaUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 040018B68E1D6F3D6B4865AB63B20B79 /* NovaUtils.m */; };
+		748D3587008AAC9F0C74C6E6FE94DE20 /* NovaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 895CD7349AE4A098A19E200E04AA8254 /* NovaData.m */; };
+		9172329D6D323377F3BF0E72887C505F /* nova.js in Resources */ = {isa = PBXBuildFile; fileRef = 2C1B704B649D7ED31F92166F033AC474 /* nova.js */; };
+		945B83D8B6017D3812C0A20187550691 /* NovaPersistentMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BFE89EBDBD53425EA169020A1E177EE /* NovaPersistentMap.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9C16EA52827BED951CBC1BF4A688A805 /* NovaUI.m in Sources */ = {isa = PBXBuildFile; fileRef = 262DC199573FD1F30235D66734558D1F /* NovaUI.m */; };
+		AAD21D55FF19BFD61EF4E9C00AB0CDC7 /* Nova-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 14DAE05F18E935E5715644FF1DDF536F /* Nova-dummy.m */; };
+		B2B5E6423E9832B244FDFB33F96CE4A2 /* Pods-NovaDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CE6D641E143F32C9110727E05221853 /* Pods-NovaDemo-dummy.m */; };
+		BB47E6677BE03FED846B35430ADEF803 /* NovaPersistentMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 55ACCF6FF9CAA03F4D04888564B693EC /* NovaPersistentMap.m */; };
+		C76B4580CDBE5884B25D6B5BB196167F /* NovaData.h in Headers */ = {isa = PBXBuildFile; fileRef = F331B8939DDBAE7E82993EF2C2FB2952 /* NovaData.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CED83637A61D99CCE07F7DC0D40605F6 /* NovaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5051C345EADDFD28C6B54D3BBA249BAC /* NovaUtils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CF617757402B5A8D22D11F679BCFA0BD /* NovaRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88903F9E17819E8D2985F2DE91AD0326 /* NovaRootViewController.m */; };
+		FA16F8619E3EC4AB459EBE404B13C4F5 /* NovaBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 584A8F9CB908FAD56BEEFB9D89B9850F /* NovaBridge.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		40BA0F64536F95CABD1E3589BF7BB4A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 68692629E7CBE2330D0124698771C4A8;
+			remoteInfo = "Nova-Nova";
+		};
+		66A2DF6B1D29FD62FEB4D85FD6B341AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88521E9F5225A45D0CCA6A5AA4DF85BE;
+			remoteInfo = Nova;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		020AC2EA737DAD1B3FEF47D475CDA30B /* NovaBridge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaBridge.h; sourceTree = "<group>"; };
+		040018B68E1D6F3D6B4865AB63B20B79 /* NovaUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaUtils.m; sourceTree = "<group>"; };
+		124A6342E49084DAA74371FC3062FD0A /* NovaBlockHolder.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaBlockHolder.m; sourceTree = "<group>"; };
+		14DAE05F18E935E5715644FF1DDF536F /* Nova-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Nova-dummy.m"; sourceTree = "<group>"; };
+		262DC199573FD1F30235D66734558D1F /* NovaUI.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaUI.m; sourceTree = "<group>"; };
+		2C1B704B649D7ED31F92166F033AC474 /* nova.js */ = {isa = PBXFileReference; includeInIndex = 1; name = nova.js; path = Nova/Resources/nova.js; sourceTree = "<group>"; };
+		458A4A857857AAB270E56EE2937B01B3 /* NovaNavigation.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaNavigation.m; sourceTree = "<group>"; };
+		49E4348D1652689909EDE917D92CB347 /* Pods-NovaDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NovaDemo.release.xcconfig"; sourceTree = "<group>"; };
+		4EF17BF6AB36C6F8432ECF1EC33751FC /* Pods-NovaDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-NovaDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
+		5051C345EADDFD28C6B54D3BBA249BAC /* NovaUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaUtils.h; sourceTree = "<group>"; };
+		55ACCF6FF9CAA03F4D04888564B693EC /* NovaPersistentMap.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaPersistentMap.m; sourceTree = "<group>"; };
+		584A8F9CB908FAD56BEEFB9D89B9850F /* NovaBridge.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaBridge.m; sourceTree = "<group>"; };
+		5B0106291013DB1978CD2B2734107D26 /* Pods-NovaDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NovaDemo-acknowledgements.plist"; sourceTree = "<group>"; };
+		618035C46DAE2A0C0E22BAEB87E358CC /* NovaNavigation.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaNavigation.h; sourceTree = "<group>"; };
+		62AEAD1D82AC28CCDA62BAFBC044B3DB /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		7B0CDB9137ED3BB83EBB0956942FA389 /* NovaUI.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaUI.h; sourceTree = "<group>"; };
+		7CE6D641E143F32C9110727E05221853 /* Pods-NovaDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-NovaDemo-dummy.m"; sourceTree = "<group>"; };
+		7F580164DA7ED5C1F7734680D26E77D2 /* Nova.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = Nova.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		82E27E6A2C383C5420EBA173394D670E /* NovaBlockHolder.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaBlockHolder.h; sourceTree = "<group>"; };
+		88903F9E17819E8D2985F2DE91AD0326 /* NovaRootViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaRootViewController.m; sourceTree = "<group>"; };
+		895CD7349AE4A098A19E200E04AA8254 /* NovaData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = NovaData.m; sourceTree = "<group>"; };
+		93F1AF9D18546C9CD557D871335DCE60 /* Pods-NovaDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-NovaDemo-resources.sh"; sourceTree = "<group>"; };
+		9B7CABCAE0BD1282590F082387D33029 /* Nova.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Nova.release.xcconfig; sourceTree = "<group>"; };
+		9BFE89EBDBD53425EA169020A1E177EE /* NovaPersistentMap.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaPersistentMap.h; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		A2D8DE0A6E13B88BA3D841CD94CA0F88 /* libNova.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = libNova.a; path = libNova.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B48BD75F447D3D7B3DE5CBE2F6A6FB1F /* Nova.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Nova.debug.xcconfig; sourceTree = "<group>"; };
+		B5F29BC65B0C2F8F5209B4C432D49E38 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		B82A09F419BA747C753097CBC85EFC03 /* ResourceBundle-Nova-Nova-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-Nova-Nova-Info.plist"; sourceTree = "<group>"; };
+		BB727CDF9F709C751AB012085CCDCB14 /* Nova.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = Nova.bundle; path = "Nova-Nova.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D90E83177C1BA14C84174F1BC824B5BE /* Nova-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Nova-prefix.pch"; sourceTree = "<group>"; };
+		D9CC57349FEDBE4B935D3B43BB8C46B3 /* NovaRootViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaRootViewController.h; sourceTree = "<group>"; };
+		E5B28FB751AB1052FF700BBAF2B77E5F /* Pods-NovaDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-NovaDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		F331B8939DDBAE7E82993EF2C2FB2952 /* NovaData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = NovaData.h; sourceTree = "<group>"; };
+		FB5DD01C8523F9C64099587FD5136E43 /* libPods-NovaDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "libPods-NovaDemo.a"; path = "libPods-NovaDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0451961F8CAD6ACCF15A1BB0D8C6C37B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8FC65E3F74278E926C7F232580F931DF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F665B67A5D0539669306704E10AA84D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E4130ACD370372C5120DA80F7D82561 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A2D8DE0A6E13B88BA3D841CD94CA0F88 /* libNova.a */,
+				FB5DD01C8523F9C64099587FD5136E43 /* libPods-NovaDemo.a */,
+				BB727CDF9F709C751AB012085CCDCB14 /* Nova.bundle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1E0375D98B6FC54DA845B183BCDB815F /* MessageHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				020AC2EA737DAD1B3FEF47D475CDA30B /* NovaBridge.h */,
+				584A8F9CB908FAD56BEEFB9D89B9850F /* NovaBridge.m */,
+				F331B8939DDBAE7E82993EF2C2FB2952 /* NovaData.h */,
+				895CD7349AE4A098A19E200E04AA8254 /* NovaData.m */,
+				618035C46DAE2A0C0E22BAEB87E358CC /* NovaNavigation.h */,
+				458A4A857857AAB270E56EE2937B01B3 /* NovaNavigation.m */,
+				7B0CDB9137ED3BB83EBB0956942FA389 /* NovaUI.h */,
+				262DC199573FD1F30235D66734558D1F /* NovaUI.m */,
+			);
+			name = MessageHandlers;
+			path = Nova/Sources/MessageHandlers;
+			sourceTree = "<group>";
+		};
+		46EE99659A0675BFB3DBBE65AB54294C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D9CC57349FEDBE4B935D3B43BB8C46B3 /* NovaRootViewController.h */,
+				88903F9E17819E8D2985F2DE91AD0326 /* NovaRootViewController.m */,
+			);
+			name = Core;
+			path = Nova/Sources/Core;
+			sourceTree = "<group>";
+		};
+		4C67155A9C2F3EC3D7D2D4F79D294A46 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79F33A8F507C1C57D50F0AEB0475AB18 /* Nova */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		79F33A8F507C1C57D50F0AEB0475AB18 /* Nova */ = {
+			isa = PBXGroup;
+			children = (
+				46EE99659A0675BFB3DBBE65AB54294C /* Core */,
+				1E0375D98B6FC54DA845B183BCDB815F /* MessageHandlers */,
+				A8B438179A7F98DAB02E7E10A23EE0F1 /* Pod */,
+				9000C705F1B98617ED6427A7453A29EC /* Resources */,
+				FFAA56E07717FD7429E79058AF93965F /* Support Files */,
+				9EC20D56E9A1306D770EECC6821A5264 /* Utils */,
+			);
+			name = Nova;
+			path = ../..;
+			sourceTree = "<group>";
+		};
+		9000C705F1B98617ED6427A7453A29EC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C1B704B649D7ED31F92166F033AC474 /* nova.js */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		9EC20D56E9A1306D770EECC6821A5264 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				82E27E6A2C383C5420EBA173394D670E /* NovaBlockHolder.h */,
+				124A6342E49084DAA74371FC3062FD0A /* NovaBlockHolder.m */,
+				9BFE89EBDBD53425EA169020A1E177EE /* NovaPersistentMap.h */,
+				55ACCF6FF9CAA03F4D04888564B693EC /* NovaPersistentMap.m */,
+				5051C345EADDFD28C6B54D3BBA249BAC /* NovaUtils.h */,
+				040018B68E1D6F3D6B4865AB63B20B79 /* NovaUtils.m */,
+			);
+			name = Utils;
+			path = Nova/Sources/Utils;
+			sourceTree = "<group>";
+		};
+		A8B438179A7F98DAB02E7E10A23EE0F1 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				B5F29BC65B0C2F8F5209B4C432D49E38 /* LICENSE */,
+				7F580164DA7ED5C1F7734680D26E77D2 /* Nova.podspec */,
+				62AEAD1D82AC28CCDA62BAFBC044B3DB /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		B891147B335C248C3F145E9D19D15520 /* Pods-NovaDemo */ = {
+			isa = PBXGroup;
+			children = (
+				4EF17BF6AB36C6F8432ECF1EC33751FC /* Pods-NovaDemo-acknowledgements.markdown */,
+				5B0106291013DB1978CD2B2734107D26 /* Pods-NovaDemo-acknowledgements.plist */,
+				7CE6D641E143F32C9110727E05221853 /* Pods-NovaDemo-dummy.m */,
+				93F1AF9D18546C9CD557D871335DCE60 /* Pods-NovaDemo-resources.sh */,
+				E5B28FB751AB1052FF700BBAF2B77E5F /* Pods-NovaDemo.debug.xcconfig */,
+				49E4348D1652689909EDE917D92CB347 /* Pods-NovaDemo.release.xcconfig */,
+			);
+			name = "Pods-NovaDemo";
+			path = "Target Support Files/Pods-NovaDemo";
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				4C67155A9C2F3EC3D7D2D4F79D294A46 /* Development Pods */,
+				D89477F20FB1DE18A04690586D7808C4 /* Frameworks */,
+				0E4130ACD370372C5120DA80F7D82561 /* Products */,
+				E4D7B1593C0D56ACDE0E426776E484E5 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D89477F20FB1DE18A04690586D7808C4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E4D7B1593C0D56ACDE0E426776E484E5 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B891147B335C248C3F145E9D19D15520 /* Pods-NovaDemo */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		FFAA56E07717FD7429E79058AF93965F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				14DAE05F18E935E5715644FF1DDF536F /* Nova-dummy.m */,
+				D90E83177C1BA14C84174F1BC824B5BE /* Nova-prefix.pch */,
+				B48BD75F447D3D7B3DE5CBE2F6A6FB1F /* Nova.debug.xcconfig */,
+				9B7CABCAE0BD1282590F082387D33029 /* Nova.release.xcconfig */,
+				B82A09F419BA747C753097CBC85EFC03 /* ResourceBundle-Nova-Nova-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/Nova";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		5DB5495AF263E547E2FCB7BEF2E42549 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				69B48EC130A7061C4EF6CA14935EB851 /* NovaBlockHolder.h in Headers */,
+				68C02DC1ABD8F367BE0C8DD44909F720 /* NovaBridge.h in Headers */,
+				C76B4580CDBE5884B25D6B5BB196167F /* NovaData.h in Headers */,
+				5CD15675198FAF783A24D821E106A147 /* NovaNavigation.h in Headers */,
+				945B83D8B6017D3812C0A20187550691 /* NovaPersistentMap.h in Headers */,
+				0E806A2A36D9CEBDD991FE3C476A4B97 /* NovaRootViewController.h in Headers */,
+				2BDEBFC396199F628421462C139C4C8F /* NovaUI.h in Headers */,
+				CED83637A61D99CCE07F7DC0D40605F6 /* NovaUtils.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		75804B08712B6277E89F3D60B9ED72C4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		68692629E7CBE2330D0124698771C4A8 /* Nova-Nova */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7593D4F3B9E09FBC78D75851DAC827E /* Build configuration list for PBXNativeTarget "Nova-Nova" */;
+			buildPhases = (
+				2B123FFF5DD283BD7CD6E94588D36A04 /* Sources */,
+				F665B67A5D0539669306704E10AA84D6 /* Frameworks */,
+				FFC6B265E7A7A1A8EEAE8C911204B79C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Nova-Nova";
+			productName = "Nova-Nova";
+			productReference = BB727CDF9F709C751AB012085CCDCB14 /* Nova.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
+		8062395B002ED35C569B7B93DAA6A77F /* Pods-NovaDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E8EC3E6AE553B0AC2A286C2804CE6D19 /* Build configuration list for PBXNativeTarget "Pods-NovaDemo" */;
+			buildPhases = (
+				75804B08712B6277E89F3D60B9ED72C4 /* Headers */,
+				DDF5053E7F89D5AD4698EDE6805D769A /* Sources */,
+				0451961F8CAD6ACCF15A1BB0D8C6C37B /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8B5E4929D041A73F555B2C9FB3B43EE5 /* PBXTargetDependency */,
+			);
+			name = "Pods-NovaDemo";
+			productName = "Pods-NovaDemo";
+			productReference = FB5DD01C8523F9C64099587FD5136E43 /* libPods-NovaDemo.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		88521E9F5225A45D0CCA6A5AA4DF85BE /* Nova */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4800782A4963AF87AF2126DC45F65A5D /* Build configuration list for PBXNativeTarget "Nova" */;
+			buildPhases = (
+				5DB5495AF263E547E2FCB7BEF2E42549 /* Headers */,
+				2ED2DDECD171597B43738F302484CE06 /* Sources */,
+				8FC65E3F74278E926C7F232580F931DF /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AD8CEA9036FAAD4504ADE8128D288E08 /* PBXTargetDependency */,
+			);
+			name = Nova;
+			productName = Nova;
+			productReference = A2D8DE0A6E13B88BA3D841CD94CA0F88 /* libNova.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 0E4130ACD370372C5120DA80F7D82561 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				88521E9F5225A45D0CCA6A5AA4DF85BE /* Nova */,
+				68692629E7CBE2330D0124698771C4A8 /* Nova-Nova */,
+				8062395B002ED35C569B7B93DAA6A77F /* Pods-NovaDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FFC6B265E7A7A1A8EEAE8C911204B79C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9172329D6D323377F3BF0E72887C505F /* nova.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2B123FFF5DD283BD7CD6E94588D36A04 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ED2DDECD171597B43738F302484CE06 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAD21D55FF19BFD61EF4E9C00AB0CDC7 /* Nova-dummy.m in Sources */,
+				37C45C8679FF701C66DABD09C5DA8569 /* NovaBlockHolder.m in Sources */,
+				FA16F8619E3EC4AB459EBE404B13C4F5 /* NovaBridge.m in Sources */,
+				748D3587008AAC9F0C74C6E6FE94DE20 /* NovaData.m in Sources */,
+				02F6CC1D4AAC2BDAE9FD614A5B8869FF /* NovaNavigation.m in Sources */,
+				BB47E6677BE03FED846B35430ADEF803 /* NovaPersistentMap.m in Sources */,
+				CF617757402B5A8D22D11F679BCFA0BD /* NovaRootViewController.m in Sources */,
+				9C16EA52827BED951CBC1BF4A688A805 /* NovaUI.m in Sources */,
+				6D2FCBEE6A5F12F8AF873B6D48881DB7 /* NovaUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDF5053E7F89D5AD4698EDE6805D769A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2B5E6423E9832B244FDFB33F96CE4A2 /* Pods-NovaDemo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8B5E4929D041A73F555B2C9FB3B43EE5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Nova;
+			target = 88521E9F5225A45D0CCA6A5AA4DF85BE /* Nova */;
+			targetProxy = 66A2DF6B1D29FD62FEB4D85FD6B341AB /* PBXContainerItemProxy */;
+		};
+		AD8CEA9036FAAD4504ADE8128D288E08 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Nova-Nova";
+			target = 68692629E7CBE2330D0124698771C4A8 /* Nova-Nova */;
+			targetProxy = 40BA0F64536F95CABD1E3589BF7BB4A4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0D62CCB9741E5348CB804BC0DA47A10D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B7CABCAE0BD1282590F082387D33029 /* Nova.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/Nova/Nova-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = Nova;
+				PRODUCT_NAME = Nova;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		38015583E259C0A968ED8942ACE5BA4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9B7CABCAE0BD1282590F082387D33029 /* Nova.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Nova";
+				IBSC_MODULE = Nova;
+				INFOPLIST_FILE = "Target Support Files/Nova/ResourceBundle-Nova-Nova-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = Nova;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		8F17DC3A99F99FBAD606CE6963886315 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		916E0404255105F480DC4950B7625F7A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		9A2AAADC15BA1A11348167422D311342 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E4348D1652689909EDE917D92CB347 /* Pods-NovaDemo.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BA65BA52590EAC1728CD4D9E1D1D0584 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E5B28FB751AB1052FF700BBAF2B77E5F /* Pods-NovaDemo.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C1C3AD4E64F33EBCCB39810359C4A720 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B48BD75F447D3D7B3DE5CBE2F6A6FB1F /* Nova.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Nova";
+				IBSC_MODULE = Nova;
+				INFOPLIST_FILE = "Target Support Files/Nova/ResourceBundle-Nova-Nova-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				PRODUCT_NAME = Nova;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		D9CA3A66F1881547066A999042057869 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B48BD75F447D3D7B3DE5CBE2F6A6FB1F /* Nova.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/Nova/Nova-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = Nova;
+				PRODUCT_NAME = Nova;
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4800782A4963AF87AF2126DC45F65A5D /* Build configuration list for PBXNativeTarget "Nova" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D9CA3A66F1881547066A999042057869 /* Debug */,
+				0D62CCB9741E5348CB804BC0DA47A10D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916E0404255105F480DC4950B7625F7A /* Debug */,
+				8F17DC3A99F99FBAD606CE6963886315 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B7593D4F3B9E09FBC78D75851DAC827E /* Build configuration list for PBXNativeTarget "Nova-Nova" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1C3AD4E64F33EBCCB39810359C4A720 /* Debug */,
+				38015583E259C0A968ED8942ACE5BA4E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E8EC3E6AE553B0AC2A286C2804CE6D19 /* Build configuration list for PBXNativeTarget "Pods-NovaDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA65BA52590EAC1728CD4D9E1D1D0584 /* Debug */,
+				9A2AAADC15BA1A11348167422D311342 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

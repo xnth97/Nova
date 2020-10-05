@@ -1,0 +1,16 @@
+PODS:
+  - Nova (0.2)
+
+DEPENDENCIES:
+  - Nova (from `../`)
+
+EXTERNAL SOURCES:
+  Nova:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Nova: 0b69a23071795b5de9fc553a19fab016d0189816
+
+PODFILE CHECKSUM: 276c773b6046de9ce9739d0545cbba3c6548a588
+
+COCOAPODS: 1.9.3
